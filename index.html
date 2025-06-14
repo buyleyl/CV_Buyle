@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Berend Buyle - International business consultant specializing in cross-cultural communication, policy writing, and stakeholder engagement across Asia-Europe markets.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Berend Buyle - Connecting People, Policies & Markets">
+    <meta property="og:description" content="From Singapore Air Force logistics to supporting Flemish companies in Japan - bridging cultures and transforming complex ideas into winning narratives.">
+    <meta property="og:type" content="website">
+    <title>Berend Buyle - Connecting People, Policies & Markets</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-globe"></script>
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Inter Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+<!-- Scroll Progress Indicator -->
+<div class="scroll-progress">
+    <div class="scroll-progress-bar" id="scrollProgress"></div>
+</div>
+
+<!-- 浮动3D Journey按钮 - 替换原来的浮动CTA -->
+<div class="floating-journey-cta" id="floatingJourney" title="Explore My Global Journey">
+    <div class="floating-icon">🌍</div>
+    <div class="floating-text">
+        <span class="floating-title">Journey</span>
+        <span class="floating-subtitle">Explore</span>
+    </div>
+</div>
+
+<!-- Mobile Menu Button -->
+<button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+
+<!-- Sidebar Navigation -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+        <h2>Berend</h2>
+    </div>
+    <nav class="sidebar-nav">
+        <ul class="nav-menu">
+            <li><a class="nav-link active" data-section="home">Home</a></li>
+            <li><a class="nav-link" data-section="about">About</a></li>
+            <li><a class="nav-link" data-section="experience">Experience</a></li>
+            <li><a class="nav-link" data-section="projects">Projects</a></li>
+            <li><a class="nav-link" data-section="writing">Writing</a></li>
+            <li><a class="nav-link" data-section="contact">Contact</a></li>
+        </ul>
+    </nav>
+    <div class="sidebar-social">
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/berend-buyle-7611a9225/" title="LinkedIn" aria-label="Visit Berend's LinkedIn profile">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+            </a>
+            <a href="mailto:berend.buyle@gmail.com" title="Email" aria-label="Send email to Berend">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h1.535L12 11.602l8.829-7.781h1.535c.904 0 1.636.732 1.636 1.636z"/>
+                </svg>
+            </a>
+            <a href="https://github.com/buyleyl" title="GitHub" aria-label="Visit Berend's GitHub profile">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                </svg>
+            </a>
+        </div>
+        <div class="sidebar-footer">
+            Copyright ©2025 Berend Buyle.<br>All rights reserved.
+        </div>
+    </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+    <!-- Home Section -->
+    <section id="home" class="section hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Connecting <span>People</span>,<br><span>Policies</span> & <span>Markets</span></h1>
+                    <p class="subtitle">From coordinating complex operations where precision meant mission success, to navigating regulatory frameworks across three continents, to building partnerships that bridge institutional boundaries — <strong>I turn complexity into clarity and stakeholder alignment into actionable outcomes.</strong></p>
+
+                    <!-- 🎯 这里是新的双按钮组 -->
+                    <div class="hero-cta-group">
+                        <a href="global-journey.html" class="hero-cta primary" target="_blank">
+                            <span class="cta-icon">🌍</span>
+                            <span class="cta-text">Explore My Journey</span>
+                            <span class="cta-arrow">↗</span>
+                        </a>
+                        <a class="hero-cta secondary nav-link" data-section="contact">
+                            <span class="cta-text">Start a Conversation</span>
+                            <span class="cta-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-photo" onclick="uploadHeroPhoto()">
+                    <div class="photo-placeholder">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📸</div>
+                        <strong>Professional Headshot</strong><br>
+                        <small style="color: rgba(255,255,255,0.7); margin-top: 8px;">Click to upload your photo</small>
+                        <div style="margin-top: 12px; font-size: 12px; color: rgba(255,255,255,0.6);">
+                            Recommended: Professional photo showing you in business attire or working environment
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Languages</div></div>
+                <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Countries</div></div>
+                <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Continents</div></div>
+                <div class="stat-item"><div class="stat-number">2.5</div><div class="stat-label">Years in Intl Business</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -  -->
+    <section id="about" class="section about">
+        <div class="container">
+            <!-- About Hero -->
+            <div class="about-hero">
+                <h2>Strategic Communication Across Cultures</h2>
+                <p>From military logistics in Singapore to business development in Tokyo — I've developed a knack for translating complex requirements into clear action plans that get buy-in from diverse stakeholders.</p>
+            </div>
+
+            <!-- Story Cards -->
+            <div class="about-story">
+                <div class="story-card">
+                    <div class="story-number">1</div>
+                    <h3>Precision Under Pressure</h3>
+                    <p>Singapore Air Force logistics taught me that <strong>every detail matters when stakes are high</strong>. Whether coordinating mission-critical operations or ensuring exact specifications, I learned to balance comprehensive planning with adaptive execution — skills essential for navigating complex procurement requirements.</p>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-number">2</div>
+                    <h3>Cultural Code-Switching</h3>
+                    <p>From Flemish bureaucracy to Japanese business etiquette to Korean academic protocols — I've developed an intuitive understanding of <strong>how different institutions think and operate</strong>. This cultural fluency proves invaluable when tailoring proposals to diverse stakeholder expectations.</p>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-number">3</div>
+                    <h3>Complex Project Orchestration</h3>
+                    <p>Leading the Kenya recycling initiative required aligning <strong>international funding criteria, local community needs, environmental regulations, and economic sustainability</strong> — exactly the kind of multi-stakeholder complexity that defines successful government proposals.</p>
+                </div>
+
+                <div class="story-card">
+                    <div class="story-number">4</div>
+                    <h3>Strategic Relationship Building</h3>
+                    <p>At Flanders Investment & Trade Tokyo, I discovered that successful market entry isn't just about meeting requirements — it's about <strong>understanding the institutional logic behind them</strong> and building trust through culturally-informed communication strategies.</p>
+                </div>
+            </div>
+
+            <!-- Personal Section -->
+            <div class="about-personal">
+                <div class="personal-photo">
+                    <div class="photo-placeholder">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">📊</div>
+                        <strong>Strategic Thinking in Action</strong><br>
+                        <small style="color: var(--text-muted); margin-top: 8px;">Click to add your photo</small>
+                    </div>
+                </div>
+                <div class="personal-content">
+                    <h3>The Art of Institutional Persuasion</h3>
+                    <p><strong>People often tell me I have a gift for making complex situations feel manageable</strong> and helping diverse groups find alignment even when they're starting from very different places.</p>
+                    <p>Whether it's translating European business practices for Japanese institutions, coordinating international development priorities with local community needs, or synthesizing technical requirements into compelling narratives — <strong>I seem to have developed an intuition for what different stakeholders need to feel confident moving forward together.</strong></p>
+                    <p>This ability to see both the forest and the trees, combined with my multicultural background and systematic approach to problem-solving, allows me to craft strategies that resonate across institutional boundaries.</p>
+                </div>
+            </div>
+
+            <!-- Skills Showcase -->
+            <div class="skills-showcase">
+                <h3>Strategic Communication Toolkit</h3>
+                <p>Core competencies for navigating complex institutional environments and stakeholder requirements</p>
+                <div class="skills-grid">
+                    <div class="skill-bubble">
+                        <div class="skill-icon">📋</div>
+                        <h4>Requirement Analysis</h4>
+                        <p>Dissecting complex criteria and translating them into actionable frameworks</p>
+                    </div>
+                    <div class="skill-bubble">
+                        <div class="skill-icon">🎯</div>
+                        <h4>Strategic Positioning</h4>
+                        <p>Crafting compelling narratives that align with institutional priorities</p>
+                    </div>
+                    <div class="skill-bubble">
+                        <div class="skill-icon">🌍</div>
+                        <h4>Cross-Cultural Fluency</h4>
+                        <p>Adapting communication styles for diverse institutional contexts</p>
+                    </div>
+                    <div class="skill-bubble">
+                        <div class="skill-icon">⚖️</div>
+                        <h4>Regulatory Navigation</h4>
+                        <p>Understanding both explicit rules and implicit institutional logic</p>
+                    </div>
+                    <div class="skill-bubble">
+                        <div class="skill-icon">🤝</div>
+                        <h4>Stakeholder Alignment</h4>
+                        <p>Building consensus across competing interests and priorities</p>
+                    </div>
+                    <div class="skill-bubble">
+                        <div class="skill-icon">📊</div>
+                        <h4>Impact Articulation</h4>
+                        <p>Quantifying value propositions and demonstrating measurable outcomes</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Growth Timeline -->
+            <div class="growth-timeline">
+                <div class="timeline-header">
+                    <h3>Evolution of Strategic Thinking</h3>
+                    <p>How each experience built my capacity for complex institutional communication</p>
+                </div>
+                <div class="growth-steps">
+                    <div class="growth-step">
+                        <div class="step-year">2019-2021</div>
+                        <div class="step-title">Operational Precision</div>
+                        <div class="step-description">Military logistics taught me that complex systems require both attention to detail and strategic overview — essential for comprehensive proposal development.</div>
+                    </div>
+                    <div class="growth-step">
+                        <div class="step-year">2021-2023</div>
+                        <div class="step-title">Academic Rigor</div>
+                        <div class="step-description">Business economics studies provided frameworks for economic analysis, risk assessment, and evidence-based argumentation — core skills for government proposal writing.</div>
+                    </div>
+                    <div class="growth-step">
+                        <div class="step-year">2023</div>
+                        <div class="step-title">Cultural Intelligence</div>
+                        <div class="step-description">Korean exchange program deepened understanding of how institutional cultures shape decision-making processes and communication expectations.</div>
+                    </div>
+                    <div class="growth-step">
+                        <div class="step-year">2024</div>
+                        <div class="step-title">Market Entry Expertise</div>
+                        <div class="step-description">Tokyo internship revealed how successful market entry requires understanding both regulatory requirements and institutional psychology.</div>
+                    </div>
+                    <div class="growth-step">
+                        <div class="step-year">2024-2025</div>
+                        <div class="step-title">Project Leadership</div>
+                        <div class="step-description">Leading international development project taught me to align diverse stakeholder requirements into coherent implementation strategies.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Competencies -->
+            <div class="languages-section">
+                <h3 class="section-title">Technical Foundation</h3>
+                <p>Essential capabilities for government proposal development and international project management</p>
+
+                <div class="competencies-grid">
+                    <div class="competency-card">
+                        <h4>📋 Proposal Architecture</h4>
+                        <ul>
+                            <li>Government tender requirement analysis</li>
+                            <li>EU funding framework navigation</li>
+                            <li>Multi-stakeholder requirement synthesis</li>
+                            <li>Risk assessment and mitigation planning</li>
+                            <li>Budget justification and cost modeling</li>
+                        </ul>
+                    </div>
+
+                    <div class="competency-card">
+                        <h4>🏛️ Institutional Intelligence</h4>
+                        <ul>
+                            <li>EU procurement regulation understanding</li>
+                            <li>Cross-border compliance frameworks</li>
+                            <li>Cultural adaptation of formal communications</li>
+                            <li>Regulatory impact assessment</li>
+                            <li>International trade law basics</li>
+                        </ul>
+                    </div>
+
+                    <div class="competency-card">
+                        <h4>📊 Evidence Building</h4>
+                        <ul>
+                            <li>Market research and competitive analysis</li>
+                            <li>Stakeholder mapping and engagement strategy</li>
+                            <li>Economic impact modeling and forecasting</li>
+                            <li>Data visualization for decision-makers</li>
+                            <li>Performance metrics and KPI development</li>
+                        </ul>
+                    </div>
+
+                    <div class="competency-card">
+                        <h4>🤝 Project Orchestration</h4>
+                        <ul>
+                            <li>Multi-stakeholder coordination and alignment</li>
+                            <li>Timeline management and milestone tracking</li>
+                            <li>Cross-cultural team leadership</li>
+                            <li>Quality assurance and deliverable management</li>
+                            <li>Adaptive project implementation strategies</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 class="section-title">Multilingual Advantage</h3>
+                <p>Direct communication across key markets without translation barriers or cultural misunderstandings</p>
+
+                <div class="languages-grid">
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇳🇱</span>
+                            <span class="language-name">Dutch</span>
+                        </div>
+                        <span class="language-level">Native</span>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇬🇧</span>
+                            <span class="language-name">English</span>
+                        </div>
+                        <span class="language-level">Native</span>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇯🇵</span>
+                            <span class="language-name">Japanese</span>
+                        </div>
+                        <span class="language-level">Advanced</span>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇫🇷</span>
+                            <span class="language-name">French</span>
+                        </div>
+                        <span class="language-level">Conversational</span>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇨🇳</span>
+                            <span class="language-name">Mandarin</span>
+                        </div>
+                        <span class="language-level">Conversational</span>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇰🇷</span>
+                            <span class="language-name">Korean</span>
+                        </div>
+                        <span class="language-level">Basic</span>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-info">
+                            <span class="language-flag">🇩🇪</span>
+                            <span class="language-name">German</span>
+                        </div>
+                        <span class="language-level">Basic</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section experience">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-subtitle">Each experience has shaped my understanding of international business and cross-cultural collaboration.</p>
+            </div>
+            <div class="timeline">
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">2024 - Present</div>
+                    <h3 class="timeline-title">MA Business Economics</h3>
+                    <div class="timeline-company">KU Leuven, Belgium</div>
+                    <div class="timeline-description">Advanced studies in international business strategy, market analysis, and economic policy with focus on cross-border trade and stakeholder engagement frameworks.</div>
+                    <div class="timeline-impact">Currently developing thesis research on international trade facilitation — combining academic rigor with practical experience from Tokyo internship.</div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">Jul - Sep 2024</div>
+                    <h3 class="timeline-title">Business Development Intern</h3>
+                    <div class="timeline-company">Flanders Investment & Trade - Tokyo Office</div>
+                    <div class="timeline-description">Facilitated market entry for Flemish companies in Japan by developing comprehensive briefing materials, conducting regulatory research, and coordinating between European business approaches and Japanese institutional expectations.</div>
+                    <div class="timeline-impact">Key insight: Discovered that successful market entry required understanding not just what regulations said, but how Japanese institutions interpreted and applied them in practice — leading to the development of culturally-adapted compliance strategies.</div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">Aug - Dec 2023</div>
+                    <h3 class="timeline-title">Exchange Student</h3>
+                    <div class="timeline-company">Sungkyunkwan University, Seoul</div>
+                    <div class="timeline-description">Specialized in East Asian business practices, international trade dynamics, and cross-cultural organizational behavior in one of Korea's leading business programs.</div>
+                    <div class="timeline-impact">Gained firsthand insights into Asian institutional frameworks and communication styles essential for international project coordination.</div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">Sep 2022 - Present</div>
+                    <h3 class="timeline-title">Student Ambassador & Event Coordinator</h3>
+                    <div class="timeline-company">KU Leuven KICK</div>
+                    <div class="timeline-description">Promoted entrepreneurial programs among international students while coordinating cross-cultural events and facilitating startup networking initiatives.</div>
+                    <div class="timeline-impact">Designed outreach strategies that increased international participation in entrepreneurship programs, requiring stakeholder coordination across multiple time zones and cultural contexts.</div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">Jul - Sep 2022</div>
+                    <h3 class="timeline-title">Accounting Support Intern</h3>
+                    <div class="timeline-company">Vandelanotte Accountancy CVBA, Zele</div>
+                    <div class="timeline-description">Provided support in daily accounting operations, gaining exposure to Belgian business administration and regulatory compliance requirements.</div>
+                    <div class="timeline-impact">Developed understanding of Belgian administrative frameworks and attention to detail essential for regulatory compliance documentation.</div>
+                </div>
+
+                <div class="timeline-item fade-in">
+                    <div class="timeline-year">Sep 2019 - Aug 2021</div>
+                    <h3 class="timeline-title">Transport Operator</h3>
+                    <div class="timeline-company">Singapore Air Force</div>
+                    <div class="timeline-description">Led logistics operations requiring coordination between multiple departments, strict adherence to protocols, and real-time problem-solving under pressure. Responsible for ensuring mission-critical operations met exact specifications while managing competing priorities and stakeholder requirements.</div>
+                    <div class="timeline-impact">Learned that successful outcomes depend on understanding not just procedures, but the institutional logic behind them — enabling proactive problem-solving and stakeholder confidence even in high-stakes environments.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section projects">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Current Projects</h2>
+                <p class="section-subtitle">Active initiatives that combine entrepreneurship, sustainability, and international collaboration.</p>
+            </div>
+            <div class="projects-grid">
+                <!-- Featured Project - Supetai Kenya -->
+                <div class="project-card featured fade-in">
+                    <div class="project-video">
+                        <iframe
+                                src="https://player.vimeo.com/video/1086067426?title=0&byline=0&portrait=0&autoplay=0"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowfullscreen
+                                title="Supetai Kenya Project Video">
+                        </iframe>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">Featured Project • Social Impact</div>
+                        <h3 class="project-title">Supetai Project - Kenya Micro Recycling Center</h3>
+                        <div class="project-description">
+                            <p style="margin-bottom: 16px; line-height: 1.6;">In Kenya, especially in rural areas, there is no formal waste management. Most of the trash gets burned or ends up in landfills which causes environmental damage. Our project addresses this problem by setting up a recycling centre to collect and repurpose plastic waste.</p>
+                            <p style="margin-bottom: 16px; line-height: 1.6;">The workshop produces sustainable products that meet Ewaso Ngiro's community needs such as construction materials as well as souvenirs for tourists in order to cover operational costs.</p>
+                            <p style="line-height: 1.6; font-weight: 500; color: var(--accent-blue); font-size: 0.9rem;">One of the key aspects of the project was local ownership, so we worked with a community member called Issack, that way the workshop is locally owned and operated.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 - Slush'D Event -->
+                <div class="project-card fade-in">
+                    <div class="project-photo" onclick="uploadProjectPhoto('slush')">
+                        <div class="photo-placeholder">
+                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
+                            <strong>Slush'D Event Photo</strong><br>
+                            <small style="color: #999;">Click to add team/event photo</small>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">Partnership Development</div>
+                        <h3 class="project-title">Ghent Slush'D 2024 - Startup Event</h3>
+                        <div class="project-description">Partnerships team member responsible for startup outreach and lead generation for 1000+ attendee event at Wintercircus Ghent. Coordinated with founders, investors, and international participants across multiple time zones.</div>
+                    </div>
+                </div>
+
+                <!-- Project 3 - Product Innovation -->
+                <div class="project-card fade-in">
+                    <div class="project-photo" onclick="uploadProjectPhoto('innovation')">
+                        <div class="photo-placeholder">
+                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
+                            <strong>Innovation Project</strong><br>
+                            <small style="color: #999;">Click to add project photo</small>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">Sustainability Research</div>
+                        <h3 class="project-title">Product Innovation Project</h3>
+                        <div class="project-description">Interdisciplinary team member tackling sustainable printing solutions during 2022-23 academic year. Developed comprehensive analysis of environmental impact and proposed systemic improvements.</div>
+                    </div>
+                </div>
+
+                <!-- Project 4 - Leuven Gakusei Forum -->
+                <div class="project-card fade-in">
+                    <div class="project-photo" onclick="uploadProjectPhoto('gakusei')">
+                        <div class="photo-placeholder">
+                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
+                            <strong>Cultural Exchange</strong><br>
+                            <small style="color: #999;">Click to add event photo</small>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <div class="project-meta">Community Building</div>
+                        <h3 class="project-title">Leuven Gakusei Forum</h3>
+                        <div class="project-description">Organizing cultural exchange events between Japanese exchange students and local community. Building bridges across language and cultural barriers through structured programming and relationship-building.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Writing Samples Section -->
+    <section id="writing" class="section writing">
+        <div class="container">
+            <div class="section-intro">
+                <h2 class="section-title">Strategic Project Work</h2>
+                <p class="section-subtitle">Selected examples of navigating complex stakeholder environments and institutional requirements to achieve collaborative outcomes.</p>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card featured fade-in">
+                    <div class="project-image" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);">Government Funding Success</div>
+                    <div class="project-content">
+                        <div class="project-meta">Multi-Stakeholder Coordination</div>
+                        <h3 class="project-title">Supetai Kenya: Institutional Alignment Project</h3>
+                        <div class="project-description">
+                            <p style="margin-bottom: 12px;">Led a complex stakeholder coordination challenge: aligning international development priorities, local community needs, environmental standards, and economic sustainability requirements into a coherent implementation strategy.</p>
+                            <p style="font-weight: 500; color: var(--accent-primary); font-size: 0.9rem;">Challenge: Each stakeholder group had different success metrics, communication styles, and decision-making processes requiring carefully adapted approaches to build consensus.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">Regulatory Compliance</div>
+                    <div class="project-content">
+                        <div class="project-meta">Government Relations • Market Entry</div>
+                        <h3 class="project-title">Japan Market Entry Regulatory Guides</h3>
+                        <div class="project-description">Strategic briefing documents for Flemish SMEs navigating Japanese government regulations. Combined legal compliance requirements, cultural protocols, and phased implementation strategies tailored to specific industry requirements and regulatory frameworks.</div>
+                    </div>
+                </div>
+                <div class="project-card fade-in">
+                    <div class="project-image" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">Stakeholder Coordination</div>
+                    <div class="project-content">
+                        <div class="project-meta">Event Management • 1000+ Participants</div>
+                        <h3 class="project-title">Slush'D Multi-Stakeholder Communications</h3>
+                        <div class="project-description">Multi-channel outreach campaigns targeting startup founders, government representatives, and international investors. Balanced institutional tone with compelling value propositions across diverse stakeholder groups and regulatory requirements.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section contact">
+        <div class="container">
+            <div class="contact-grid">
+                <div>
+                    <h2 class="contact-title">Let's Connect</h2>
+                    <p class="contact-description">Looking to bring clarity, persuasion, and structure to your international proposal, project, or pitch? Let's build something that wins hearts — and contracts.</p>
+
+                    <!-- About section photo -->
+                    <div class="about-photo" onclick="uploadAboutPhoto()">
+                        <div class="photo-placeholder">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">🌍</div>
+                            <strong>Your Story in Action</strong><br>
+                            <small style="color: #999; margin-top: 8px;">Click to add a photo</small>
+                            <div style="margin-top: 12px; font-size: 12px; color: #666;">
+                                Suggestions: You working in Tokyo, studying in Seoul, or leading the Kenya project
+                            </div>
+                        </div>
+                        <div class="photo-caption">
+                            📍 Location • 📅 Year • 🎓 Context
+                        </div>
+                    </div>
+
+                    <a href="berendbuyle_cv_eng.pdf" class="pdf-download" download="berendbuyle_cv_eng.pdf" target="_blank">
+                        <span class="download-text">Download CV</span>
+                        <span>↓</span>
+                    </a>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-label">Email</div>
+                        <a href="mailto:berend.buyle@gmail.com" class="contact-value">berend.buyle@gmail.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Phone</div>
+                        <a href="tel:+32489749324" class="contact-value">+32 489 74 93 24</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Location</div>
+                        <div class="contact-value">Leuven, Belgium</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Availability</div>
+                        <div class="contact-value">Open for opportunities</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-label">Interests</div>
+                        <div class="contact-value">International business development, policy writing, stakeholder communication</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- 将热重载脚本移到这里 - 修复HTML结构问题 -->
+<script>
+    (function() {
+        var ws = new WebSocket('ws://' + window.location.host +
+            '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
+            'referrer=' + encodeURIComponent(window.location.pathname));
+        ws.onmessage = function (msg) {
+            if (msg.data === 'reload') {
+                window.location.reload();
+            }
+            if (msg.data.startsWith('update-css ')) {
+                var messageId = msg.data.substring(11);
+                var links = document.getElementsByTagName('link');
+                for (var i = 0; i < links.length; i++) {
+                    var link = links[i];
+                    if (link.rel !== 'stylesheet') continue;
+                    var clonedLink = link.cloneNode(true);
+                    var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
+                    if (newHref !== link.href) {
+                        clonedLink.href = newHref;
+                    }
+                    else {
+                        var indexOfQuest = newHref.indexOf('?');
+                        if (indexOfQuest >= 0) {
+                            // to support ?foo#hash
+                            clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' +
+                                newHref.substring(indexOfQuest + 1);
+                        }
+                        else {
+                            clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
+                        }
+                    }
+                    link.replaceWith(clonedLink);
+                }
+            }
+        };
+    })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script src="scripts.js"></script>
+
+</body>
+</html>
