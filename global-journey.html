@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Berend's Global Journey – Learning, Working & Life on a Rotating Globe</title>
+    <meta name="description" content="Interactive 3D visualization of Berend Buyle's global professional journey across Belgium, Singapore, Korea, Japan, and Kenya.">
+    <meta property="og:title" content="Berend's Global Journey - Interactive 3D Experience">
+    <meta property="og:description" content="Explore my multicultural professional evolution through an interactive 3D globe.">
+    <meta property="og:type" content="website">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary-navy: #2d3748;
+            --secondary-navy: #4a5568;
+            --accent-blue: #4864aa;
+            --accent-blue-light: #6d83c3;
+            --soft-white: #ffffff;
+            --light-gray: #f5f5f5;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-navy) 0%, var(--secondary-navy) 50%, var(--accent-blue) 100%);
+            color: var(--soft-white);
+        }
+        #globe-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        /* 加载指示器 */
+        #loading-indicator {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 100;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .loading-globe {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.1rem;
+            color: var(--soft-white);
+            margin-bottom: 10px;
+        }
+
+        .loading-progress {
+            width: 200px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+
+        .loading-bar {
+            height: 100%;
+            background: var(--accent-blue-light);
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .header {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            z-index: 20;
+            max-width: 400px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--soft-white), var(--accent-blue-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .header p {
+            margin-top: 12px;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: var(--light-gray);
+        }
+
+        .header .network-stats {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(72, 100, 170, 0.15);
+            border-radius: 12px;
+            border-left: 4px solid var(--accent-blue-light);
+        }
+
+        .network-stats .stat-line {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+            color: var(--accent-blue-light);
+            font-weight: 600;
+        }
+
+        .network-stats .stat-line:last-child {
+            margin-bottom: 0;
+        }
+        .back-button {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            z-index: 30;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--soft-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .back-button:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        .info-panel {
+            position: absolute;
+            right: 30px;
+            top: 10%;
+            transform: translateY(0);
+            background: rgba(255,255,255,0.08);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 300px;
+            max-height: 70vh;
+            overflow-y: auto;
+            min-height: auto;
+            z-index: 20;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease, opacity 0.15s ease, transform 0.15s ease;
+        }
+        .info-panel h3 {
+            margin: 0 0 5px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--soft-white);
+        }
+        .info-panel .flag {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+        .info-panel .year {
+            font-size: 1rem;
+            color: var(--accent-blue-light);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .info-panel p {
+            font-size: 0.95rem;
+            color: var(--light-gray);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        #skills {
+            margin-top: 16px;
+        }
+        .skill-tag {
+            display: inline-block;
+            margin: 4px 4px 0 0;
+            padding: 5px 10px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            font-size: 0.8rem;
+            color: var(--soft-white);
+            transition: all 0.2s ease;
+        }
+        .skill-tag:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+        .journey-controls {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 16px;
+            z-index: 20;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .journey-step {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--soft-white);
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .journey-step .step-year {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .journey-step .step-flag {
+            font-size: 1.5rem;
+            margin-top: 2px;
+        }
+        .journey-step:hover, .journey-step.active {
+            background: var(--accent-blue);
+            transform: scale(1.1);
+            box-shadow: 0 0 8px var(--accent-blue-light);
+        }
+
+        .journey-step:focus {
+            outline: 2px solid var(--accent-blue-light);
+            outline-offset: 2px;
+        }
+
+        /* 错误状态 */
+        .error-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 100;
+            display: none;
+        }
+
+        /* =====================================
+           移动端响应式设计
+           ===================================== */
+        @media (max-width: 768px) {
+            .header {
+                top: 15px;
+                left: 15px;
+                right: 80px;
+                max-width: none;
+            }
+            .header h1 {
+                font-size: 1.6rem;
+                line-height: 1.2;
+            }
+            .header p {
+                font-size: 0.9rem;
+                margin-top: 8px;
+            }
+            .back-button {
+                top: 15px;
+                right: 15px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            .info-panel {
+                right: 15px;
+                left: 15px;
+                top: auto;
+                bottom: 120px;
+                transform: none;
+                max-width: none;
+                padding: 15px;
+                max-height: 180px;
+                overflow-y: auto;
+            }
+            .info-panel h3 {
+                font-size: 1.1rem;
+            }
+            .info-panel p {
+                font-size: 0.85rem;
+            }
+            .info-panel .flag {
+                font-size: 1.8rem;
+            }
+            .journey-controls {
+                bottom: 15px;
+                max-width: 90%;
+                gap: 12px;
+            }
+            .journey-step {
+                width: 50px;
+                height: 50px;
+                font-size: 0.7rem;
+            }
+            .journey-step .step-year {
+                font-size: 0.75rem;
+            }
+            .journey-step .step-flag {
+                font-size: 1.2rem;
+            }
+
+            #loading-indicator {
+                padding: 20px;
+                width: 90%;
+                max-width: 300px;
+            }
+            .loading-globe {
+                font-size: 2rem;
+            }
+            .loading-text {
+                font-size: 1rem;
+            }
+            .loading-progress {
+                width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            .header p {
+                font-size: 0.8rem;
+            }
+            .info-panel {
+                bottom: 100px;
+                padding: 12px;
+                max-height: 140px;
+            }
+            .info-panel h3 {
+                font-size: 1rem;
+            }
+            .info-panel p {
+                font-size: 0.8rem;
+            }
+            .journey-controls {
+                gap: 8px;
+            }
+            .journey-step {
+                width: 45px;
+                height: 45px;
+            }
+            .journey-step .step-year {
+                font-size: 0.7rem;
+            }
+            .journey-step .step-flag {
+                font-size: 1rem;
+            }
+            .skill-tag {
+                font-size: 0.7rem;
+                padding: 3px 8px;
+                margin: 2px 2px 0 0;
+            }
+        }
+
+        /* 横屏手机优化 */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .header {
+                top: 10px;
+                left: 10px;
+                right: 80px;
+            }
+            .header h1 {
+                font-size: 1.2rem;
+            }
+            .header p {
+                font-size: 0.7rem;
+                margin-top: 5px;
+            }
+            .back-button {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+                font-size: 0.7rem;
+            }
+            .info-panel {
+                right: 10px;
+                left: auto;
+                top: 10%;
+                bottom: auto;
+                transform: translateY(0);
+                width: 250px;
+                max-height: 250px;
+                overflow-y: auto;
+                padding: 10px;
+            }
+            .journey-controls {
+                bottom: 10px;
+                gap: 8px;
+            }
+            .journey-step {
+                width: 40px;
+                height: 40px;
+                font-size: 0.6rem;
+            }
+            .journey-step .step-flag {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<a class="back-button" href="index.html">← Back</a>
+
+<!-- 加载指示器 -->
+<div id="loading-indicator">
+    <div class="loading-globe">🌍</div>
+    <div class="loading-text">Loading Global Journey...</div>
+    <div class="loading-progress">
+        <div class="loading-bar" id="loadingBar"></div>
+    </div>
+</div>
+
+<!-- 错误消息 -->
+<div id="error-message" class="error-message">
+    <h3>⚠️ Loading Error</h3>
+    <p>Failed to load 3D globe. Please check your internet connection and try again.</p>
+    <button onclick="location.reload()" style="margin-top: 10px; padding: 8px 16px; background: var(--accent-blue); color: white; border: none; border-radius: 5px; cursor: pointer;">Retry</button>
+</div>
+
+<div class="header">
+    <h1>Global Journey</h1>
+    <p><strong>Mapping my multicultural professional evolution</strong></p>
+    <p>A visualization of the countries, experiences, and cultural insights that shaped my international perspective.</p>
+</div>
+
+<div class="info-panel" id="infoPanel">
+    <div class="flag" id="flag">🌍</div>
+    <h3 id="location">Click a marker</h3>
+    <div class="year" id="year">to explore the journey</div>
+    <p id="description"></p>
+    <div id="skills"></div>
+</div>
+
+<div class="journey-controls">
+    <div class="journey-step" data-key="belgium" tabindex="0" aria-label="Belgium 2018 - Academic Journey">
+        <div class="step-year">2018</div>
+        <div class="step-flag">🇧🇪</div>
+    </div>
+    <div class="journey-step" data-key="singapore" tabindex="0" aria-label="Singapore 2019 - Military Service">
+        <div class="step-year">2019</div>
+        <div class="step-flag">🇸🇬</div>
+    </div>
+    <div class="journey-step" data-key="korea" tabindex="0" aria-label="Korea 2023 - Exchange Program">
+        <div class="step-year">2023</div>
+        <div class="step-flag">🇰🇷</div>
+    </div>
+    <div class="journey-step" data-key="japan" tabindex="0" aria-label="Japan 2024 - Business Internship">
+        <div class="step-year">2024</div>
+        <div class="step-flag">🇯🇵</div>
+    </div>
+    <div class="journey-step" data-key="kenya" tabindex="0" aria-label="Kenya 2024 - Development Project">
+        <div class="step-year">2024</div>
+        <div class="step-flag">🇰🇪</div>
+    </div>
+</div>
+
+<div id="globe-container"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+    const journeyData = {
+        belgium: {
+            name: "KU Leuven, Belgium",
+            coords: [4.7005, 50.8798],
+            flag: "🇧🇪",
+            year: "2018–2025",
+            description: "My academic journey began with Sinology and evolved into Business Economics. From foundation years to Master's studies, this is where I developed strategic thinking, cultural awareness, and multilingual capabilities while engaging in entrepreneurial activities through KICK.",
+            skills: ["Academic Excellence", "European Business Culture", "Strategic Thinking", "Entrepreneurship", "Language Learning", "Cultural Intelligence"],
+            color: 0x4864aa,
+            languageConnections: {
+                title: "Language Network Expansion",
+                description: "Dutch (native) and French (conversational) create connections across Europe and beyond:",
+                countries: ["Netherlands", "France", "Luxembourg", "Switzerland", "Canada", "Belgium"],
+                potential: "European markets + French-speaking regions"
+            }
+        },
+        singapore: {
+            name: "Singapore Air Force",
+            coords: [103.8198, 1.3521],
+            flag: "🇸🇬",
+            year: "2019–2021",
+            description: "National Service as Transport Operator in the RSAF taught me precision under pressure, logistics coordination, and operational excellence. Complex military operations require both attention to detail and adaptive execution in high-stakes environments.",
+            skills: ["Military Precision", "Logistics Coordination", "Operational Excellence", "Leadership"],
+            color: 0xe53e3e,
+            languageConnections: {
+                title: "Asia-Pacific Communication Hub",
+                description: "English (native) and Mandarin (conversational) unlock regional opportunities:",
+                countries: ["Malaysia", "Indonesia", "Philippines", "Thailand", "India", "Australia"],
+                potential: "Asia-Pacific business networks and partnerships"
+            }
+        },
+        korea: {
+            name: "Sungkyunkwan University, Seoul",
+            coords: [126.9780, 37.5665],
+            flag: "🇰🇷",
+            year: "Aug–Dec 2023",
+            description: "Exchange program immersion deepened my understanding of East Asian business culture, academic rigor, and institutional decision-making processes. Enhanced cross-cultural adaptation skills and expanded my global perspective.",
+            skills: ["East Asian Culture", "Cross-Cultural Adaptation", "Academic Rigor", "Korean Language Foundation"],
+            color: 0x38a169,
+            languageConnections: {
+                title: "East Asian Cultural Bridge",
+                description: "Korean experience + emerging Korean (basic) creates cultural pathways:",
+                countries: ["South Korea", "Korean communities", "K-culture markets"],
+                potential: "Cultural understanding in Korean business contexts"
+            }
+        },
+        japan: {
+            name: "Flanders Investment & Trade, Tokyo",
+            coords: [139.6917, 35.6895],
+            flag: "🇯🇵",
+            year: "Jul–Sep 2024",
+            description: "Internship at FIT Tokyo supporting Flemish companies expanding to the Japanese market. Learned that successful market entry requires understanding institutional psychology beyond just meeting regulatory requirements.",
+            skills: ["Market Entry Strategy", "B2B Communication", "Japanese Business Culture", "Cross-cultural Business Development"],
+            color: 0xd69e2e,
+            languageConnections: {
+                title: "Japan Business Gateway",
+                description: "Tokyo internship + advanced Japanese creates unique business advantages:",
+                countries: ["Japan", "Japanese business networks", "EU-Japan corridors"],
+                potential: "Direct access to Japanese corporate culture and practices"
+            }
+        },
+        kenya: {
+            name: "Supetai Project, Kenya",
+            coords: [36.8219, -1.2921],
+            flag: "🇰🇪",
+            year: "Sep 2024–May 2025",
+            description: "Leading international development project establishing a Micro Recycling Center in rural Maasai community of Ewaso Ngiro. Tackling plastic waste by aligning funding criteria, local community needs, environmental regulations, and economic sustainability.",
+            skills: ["Project Leadership", "Stakeholder Alignment", "Sustainability", "International Development", "Community Engagement"],
+            color: 0x805ad5,
+            languageConnections: {
+                title: "African Market Potential",
+                description: "Kenya experience + English (native) enables expansion across English-speaking Africa:",
+                countries: ["Kenya", "Tanzania", "Uganda", "Ghana", "Nigeria", "South Africa"],
+                potential: "Access to rapidly growing African markets"
+            }
+        }
+    };
+
+    let globe, scene, camera, renderer, markers = [];
+    let isLoading = true;
+
+    // 加载进度管理
+    const loadingManager = new THREE.LoadingManager();
+    let loadingProgress = 0;
+
+    loadingManager.onProgress = function(url, itemsLoaded, itemsTotal) {
+        loadingProgress = (itemsLoaded / itemsTotal) * 100;
+        document.getElementById('loadingBar').style.width = loadingProgress + '%';
+    };
+
+    loadingManager.onLoad = function() {
+        setTimeout(() => {
+            document.getElementById('loading-indicator').style.display = 'none';
+            isLoading = false;
+        }, 500);
+    };
+
+    loadingManager.onError = function(url) {
+        console.error('Failed to load:', url);
+        document.getElementById('loading-indicator').style.display = 'none';
+        document.getElementById('error-message').style.display = 'block';
+    };
+
+    function convertLatLngToSphereCoords(lat, lng, radius = 1.05) {
+        const phi = (90 - lat) * (Math.PI / 180);
+        const theta = (lng + 180) * (Math.PI / 180);
+        return new THREE.Vector3(
+            -radius * Math.sin(phi) * Math.cos(theta),
+            radius * Math.cos(phi),
+            radius * Math.sin(phi) * Math.sin(theta)
+        );
+    }
+
+    function createGlobe() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("globe-container").appendChild(renderer.domElement);
+
+        const textureLoader = new THREE.TextureLoader(loadingManager);
+
+        // 先创建基础球体
+        const geometry = new THREE.SphereGeometry(1, 64, 64);
+        const material = new THREE.MeshPhongMaterial({
+            color: 0x4864aa,
+            shininess: 10
+        });
+        globe = new THREE.Mesh(geometry, material);
+        scene.add(globe);
+
+        // 尝试加载地球纹理
+        textureLoader.load(
+            "https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg",
+            function(texture) {
+                // 成功加载纹理
+                material.map = texture;
+                material.color = new THREE.Color(0xffffff);
+                material.needsUpdate = true;
+                console.log('Earth texture loaded successfully');
+            },
+            function(progress) {
+                // 加载进度
+                if (progress.lengthComputable) {
+                    const percentComplete = (progress.loaded / progress.total) * 100;
+                    document.getElementById('loadingBar').style.width = percentComplete + '%';
+                }
+            },
+            function(error) {
+                // 加载失败，使用备用样式
+                console.warn('Earth texture failed to load, using fallback color');
+                material.color = new THREE.Color(0x4864aa);
+                // 不显示错误，继续使用纯色球体
+            }
+        );
+
+        // 创建标记
+        Object.entries(journeyData).forEach(([key, loc]) => {
+            const markerGeometry = new THREE.SphereGeometry(0.025, 16, 16);
+            const markerMaterial = new THREE.MeshBasicMaterial({ color: loc.color });
+            const marker = new THREE.Mesh(markerGeometry, markerMaterial);
+            marker.position.copy(convertLatLngToSphereCoords(loc.coords[1], loc.coords[0], 1.08));
+            marker.userData = key;
+            globe.add(marker);
+            markers.push(marker);
+        });
+
+        // 照明
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+        directionalLight.position.set(3, 2, 5);
+        scene.add(ambientLight);
+        scene.add(directionalLight);
+
+        camera.position.z = 3;
+
+        // 窗口resize处理
+        window.addEventListener('resize', onWindowResize);
+
+        animate();
+    }
+
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    // 平滑动画相关变量
+    let isAnimating = false;
+    let animationId = null;
+    let autoRotationPaused = false;
+
+    // 缓动函数 - 更自然的动画效果
+    function easeInOutCubic(t) {
+        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+    }
+
+    // 计算最短旋转路径
+    function getShortestRotation(from, to) {
+        let diff = to - from;
+        // 处理360度边界
+        if (diff > Math.PI) {
+            diff -= 2 * Math.PI;
+        } else if (diff < -Math.PI) {
+            diff += 2 * Math.PI;
+        }
+        return from + diff;
+    }
+
+    // 平滑旋转到目标位置
+    function animateToLocation(targetLat, targetLng, duration = 1500) {
+        if (isAnimating) {
+            // 如果正在动画中，取消当前动画
+            if (animationId) {
+                cancelAnimationFrame(animationId);
+            }
+        }
+
+        isAnimating = true;
+        autoRotationPaused = true;
+
+        const startRotationX = globe.rotation.x;
+        const startRotationY = globe.rotation.y;
+        const targetRotationX = targetLat * Math.PI / 180;
+        const targetRotationY = -targetLng * Math.PI / 180;
+
+        // 计算最短路径
+        const endRotationY = getShortestRotation(startRotationY, targetRotationY);
+
+        const startTime = Date.now();
+
+        function animate() {
+            const elapsed = Date.now() - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            const easeProgress = easeInOutCubic(progress);
+
+            // 插值计算当前旋转角度
+            globe.rotation.x = startRotationX + (targetRotationX - startRotationX) * easeProgress;
+            globe.rotation.y = startRotationY + (endRotationY - startRotationY) * easeProgress;
+
+            if (progress < 1) {
+                animationId = requestAnimationFrame(animate);
+            } else {
+                // 动画完成
+                isAnimating = false;
+                animationId = null;
+                // 延迟恢复自动旋转
+                setTimeout(() => {
+                    autoRotationPaused = false;
+                }, 2000); // 2秒后恢复自动旋转
+            }
+        }
+
+        animationId = requestAnimationFrame(animate);
+    }
+
+    function updateInfoPanel(key) {
+        const data = journeyData[key];
+
+        // 添加面板更新动画
+        const panel = document.getElementById("infoPanel");
+        panel.style.opacity = "0.7";
+        panel.style.transform = panel.style.transform.replace(/scale\([^)]*\)/, '') + ' scale(0.95)';
+
+        setTimeout(() => {
+            document.getElementById("flag").textContent = data.flag;
+            document.getElementById("location").textContent = data.name;
+            document.getElementById("year").textContent = data.year;
+            document.getElementById("description").textContent = data.description;
+            document.getElementById("skills").innerHTML = data.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+
+            // 添加语言网络扩展信息
+            const languageInfo = data.languageConnections;
+            const existingLanguageSection = document.getElementById("languageConnections");
+            if (existingLanguageSection) {
+                existingLanguageSection.remove();
+            }
+
+            const languageSection = document.createElement('div');
+            languageSection.id = "languageConnections";
+            languageSection.style.cssText = `
+                margin-top: 20px;
+                padding: 16px;
+                background: rgba(72, 100, 170, 0.1);
+                border-radius: 12px;
+                border-left: 4px solid var(--accent-blue);
+            `;
+
+            languageSection.innerHTML = `
+                <h4 style="margin: 0 0 10px; color: var(--accent-blue); font-size: 0.95rem; font-weight: 600;">
+                    🌐 ${languageInfo.title}
+                </h4>
+                <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.4; color: var(--light-gray);">
+                    ${languageInfo.description}
+                </p>
+                <div style="margin-bottom: 10px;">
+                    ${languageInfo.countries.slice(0, 6).map(country =>
+                `<span style="display: inline-block; margin: 2px 3px 0 0; padding: 2px 6px; background: rgba(255,255,255,0.1); border-radius: 6px; font-size: 0.7rem; color: var(--soft-white);">${country}</span>`
+            ).join('')}
+                    ${languageInfo.countries.length > 6 ? '<span style="font-size: 0.7rem; color: var(--accent-blue-light);">+more</span>' : ''}
+                </div>
+                <div style="font-size: 0.8rem; color: var(--accent-blue-light); font-weight: 500; font-style: italic;">
+                    💼 ${languageInfo.potential}
+                </div>
+            `;
+
+            panel.appendChild(languageSection);
+
+            // 恢复面板动画
+            panel.style.opacity = "1";
+            panel.style.transform = panel.style.transform.replace(/scale\([^)]*\)/, '') + ' scale(1)';
+        }, 150);
+
+        // 更新活跃状态
+        document.querySelectorAll('.journey-step').forEach(el => el.classList.remove('active'));
+        const activeStep = document.querySelector(`.journey-step[data-key="${key}"]`);
+        if (activeStep) {
+            activeStep.classList.add('active');
+
+            // 添加点击反馈动画
+            activeStep.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                activeStep.style.transform = '';
+            }, 200);
+        }
+
+        // 平滑旋转地球到选定位置
+        const lat = data.coords[1];
+        const lng = data.coords[0];
+        animateToLocation(lat, lng);
+    }
+
+    // 点击检测
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    // 标记悬停效果
+    let hoveredMarker = null;
+
+    function onMouseMove(event) {
+        if (isLoading || isAnimating) return;
+
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(markers);
+
+        // 重置之前悬停的标记
+        if (hoveredMarker) {
+            hoveredMarker.scale.set(1, 1, 1);
+            document.body.style.cursor = 'default';
+        }
+
+        if (intersects.length > 0) {
+            hoveredMarker = intersects[0].object;
+            hoveredMarker.scale.set(1.5, 1.5, 1.5);
+            document.body.style.cursor = 'pointer';
+
+            // 显示预览信息
+            const key = hoveredMarker.userData;
+            const data = journeyData[key];
+            hoveredMarker.material.emissive.setHex(0x333333);
+        } else {
+            hoveredMarker = null;
+        }
+
+        // 重置发光效果
+        markers.forEach(marker => {
+            if (marker !== hoveredMarker) {
+                marker.material.emissive.setHex(0x000000);
+            }
+        });
+    }
+
+    function onClick(event) {
+        if (isLoading) return;
+
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(markers);
+        if (intersects.length > 0) {
+            updateInfoPanel(intersects[0].object.userData);
+        }
+    }
+
+    // 事件监听
+    function setupEventListeners() {
+        renderer.domElement.addEventListener('click', onClick);
+        renderer.domElement.addEventListener('mousemove', onMouseMove);
+
+        // 控制按钮事件
+        document.querySelectorAll('.journey-step').forEach(btn => {
+            btn.addEventListener('click', () => updateInfoPanel(btn.dataset.key));
+
+            // 键盘支持
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    updateInfoPanel(btn.dataset.key);
+                }
+            });
+        });
+
+        // 键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (isLoading || isAnimating) return;
+
+            const keys = Object.keys(journeyData);
+            const currentActive = document.querySelector('.journey-step.active');
+
+            if (!currentActive) return;
+
+            const currentIndex = keys.indexOf(currentActive.dataset.key);
+            let newIndex = currentIndex;
+
+            switch(e.key) {
+                case 'ArrowLeft':
+                case 'ArrowUp':
+                    newIndex = (currentIndex - 1 + keys.length) % keys.length;
+                    break;
+                case 'ArrowRight':
+                case 'ArrowDown':
+                    newIndex = (currentIndex + 1) % keys.length;
+                    break;
+                default:
+                    return;
+            }
+
+            e.preventDefault();
+            updateInfoPanel(keys[newIndex]);
+        });
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        if (!isLoading && globe && !autoRotationPaused) {
+            globe.rotation.y += 0.0015;
+        }
+        if (renderer && scene && camera) {
+            renderer.render(scene, camera);
+        }
+    }
+
+    // 初始化
+    try {
+        createGlobe();
+        setupEventListeners();
+    } catch (error) {
+        console.error('Failed to initialize globe:', error);
+        document.getElementById('loading-indicator').style.display = 'none';
+        document.getElementById('error-message').style.display = 'block';
+    }
+</script>
+</body>
+</html>
