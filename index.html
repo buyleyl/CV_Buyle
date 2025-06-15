@@ -1,25 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Berend Buyle - International business consultant specializing in cross-cultural communication, policy writing, and stakeholder engagement across Asia-Europe markets.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Open Graph -->
     <meta property="og:title" content="Berend Buyle - Connecting People, Policies & Markets">
     <meta property="og:description" content="From Singapore Air Force logistics to supporting Flemish companies in Japan - bridging cultures and transforming complex ideas into winning narratives.">
     <meta property="og:type" content="website">
-    <title>Berend Buyle - Connecting People, Policies & Markets</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three-globe"></script>
-    <!-- PDF Generation Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- Inter Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta property="og:url" content="https://yourdomain.com/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://yourdomain.com/assets/berend-og-cover.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Berend Buyle - Connecting People, Policies & Markets">
+    <meta name="twitter:description" content="From Singapore Air Force logistics to supporting Flemish companies in Japan – bridging cultures and transforming complex ideas into winning narratives.">
+    <meta name="twitter:image" content="https://yourdomain.com/assets/berend-og-cover.webp">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- Preload cover image -->
+    <link rel="preload" as="image" href="/assets/berend-og-cover.webp" type="image/webp">
+
+    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 
+    <!-- 3D Dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three-globe"></script>
+    <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
 </head>
+
 <body>
 <!-- Scroll Progress Indicator -->
 <div class="scroll-progress">
@@ -587,47 +608,71 @@
     </section>
 </main>
 
-<!-- 将热重载脚本移到这里 - 修复HTML结构问题 -->
-<script>
-    (function() {
-        var ws = new WebSocket('ws://' + window.location.host +
-            '/jb-server-page?reloadMode=RELOAD_ON_SAVE&'+
-            'referrer=' + encodeURIComponent(window.location.pathname));
-        ws.onmessage = function (msg) {
-            if (msg.data === 'reload') {
-                window.location.reload();
-            }
-            if (msg.data.startsWith('update-css ')) {
-                var messageId = msg.data.substring(11);
-                var links = document.getElementsByTagName('link');
-                for (var i = 0; i < links.length; i++) {
-                    var link = links[i];
-                    if (link.rel !== 'stylesheet') continue;
-                    var clonedLink = link.cloneNode(true);
-                    var newHref = link.href.replace(/(&|\?)jbUpdateLinksId=\d+/, "$1jbUpdateLinksId=" + messageId);
-                    if (newHref !== link.href) {
-                        clonedLink.href = newHref;
-                    }
-                    else {
-                        var indexOfQuest = newHref.indexOf('?');
-                        if (indexOfQuest >= 0) {
-                            // to support ?foo#hash
-                            clonedLink.href = newHref.substring(0, indexOfQuest + 1) + 'jbUpdateLinksId=' + messageId + '&' +
-                                newHref.substring(indexOfQuest + 1);
-                        }
-                        else {
-                            clonedLink.href += '?' + 'jbUpdateLinksId=' + messageId;
-                        }
-                    }
-                    link.replaceWith(clonedLink);
-                }
-            }
-        };
-    })();
-</script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script src="scripts.js"></script>
+
+<!-- 👇 Journey 弹窗模态框结构 👇 -->
+<div id="journeyModal" class="modal hidden">
+    <div class="modal-content">
+        <button onclick="closeJourneyModal()" aria-label="Close globe">✖</button>
+        <canvas id="globeCanvas"></canvas>
+    </div>
+</div>
+
+<!-- 👇 自定义增强脚本：粘贴在此处 👇 -->
+<script>
+    // 平滑滚动导航
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const targetId = link.dataset.section;
+            const target = document.getElementById(targetId);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+
+
+    // 浮动 Journey 按钮 → 弹出 globe 弹窗
+    document.getElementById('floatingJourney').addEventListener('click', () => {
+        document.getElementById('journeyModal').classList.remove('hidden');
+        initGlobe(); // 渲染 globe
+    });
+
+    function closeJourneyModal() {
+        document.getElementById('journeyModal').classList.add('hidden');
+    }
+
+    // 初始化 Three.js Globe
+    function initGlobe() {
+        const container = document.getElementById('globeCanvas');
+        container.innerHTML = ''; // 清除旧 canvas
+
+        const renderer = new THREE.WebGLRenderer();
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        container.appendChild(renderer.domElement);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 300;
+
+        const globe = new ThreeGlobe().globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg');
+        scene.add(globe);
+
+        const controls = new THREE.OrbitControls(camera, renderer.domElement);
+        function animate() {
+            requestAnimationFrame(animate);
+            globe.rotation.y += 0.002;
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        animate();
+    }
+</script>
 
 </body>
 </html>
