@@ -580,3 +580,4 @@ document.addEventListener('DOMContentLoaded', function() {
     // 添加增强功能初始化
     initEnhancedFeatures();
 });
+
