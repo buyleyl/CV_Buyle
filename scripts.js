@@ -86,8 +86,12 @@ document.addEventListener('DOMContentLoaded', function () {
             if (window.innerWidth <= 768) {
                 document.getElementById('sidebar').classList.remove('open');
             }
+
+            // 👇 加这一句！平滑滚动到新 section 顶部
+            targetElement.scrollIntoView({ behavior: 'smooth' });
         }
     }
+
 
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -581,4 +585,15 @@ document.addEventListener('DOMContentLoaded', function() {
     initEnhancedFeatures();
 });
 
+document.querySelectorAll('.nav-node').forEach((node, i) => {
+    node.addEventListener('click', () => {
+        document.querySelectorAll('.nav-node').forEach(n => n.classList.remove('active'));
+        node.classList.add('active');
+
+        document.querySelectorAll('.experience-card').forEach(card => {
+            card.classList.remove('active');
+        });
+        document.querySelector(`.experience-card[data-index="${i}"]`)?.classList.add('active');
+    });
+});
 
