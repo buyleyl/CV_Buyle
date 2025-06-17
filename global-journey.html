@@ -143,14 +143,12 @@
         .info-panel {
             position: absolute;
             right: 30px;
-            top: 10%;
+            top: 15%;
             transform: translateY(0);
             background: rgba(255,255,255,0.08);
             padding: 20px;
             border-radius: 15px;
             max-width: 300px;
-            max-height: 70vh;
-            overflow-y: auto;
             min-height: auto;
             z-index: 20;
             backdrop-filter: blur(10px);
@@ -490,9 +488,9 @@
             color: 0x4864aa,
             languageConnections: {
                 title: "Language Network Expansion",
-                description: "Dutch (native) and French (conversational) create connections across Europe and beyond:",
-                countries: ["Netherlands", "France", "Luxembourg", "Switzerland", "Canada", "Belgium"],
-                potential: "European markets + French-speaking regions"
+                description: "From Belgium, my Dutch (native) and French (conversational) create connections across:",
+                countries: ["Netherlands", "France", "Luxembourg", "Switzerland", "Canada", "Senegal", "Morocco", "Ivory Coast", "Belgium regions"],
+                potential: "62M+ Dutch speakers, 321M+ French speakers across 35+ countries"
             }
         },
         singapore: {
@@ -505,9 +503,9 @@
             color: 0xe53e3e,
             languageConnections: {
                 title: "Asia-Pacific Communication Hub",
-                description: "English (native) and Mandarin (conversational) unlock regional opportunities:",
-                countries: ["Malaysia", "Indonesia", "Philippines", "Thailand", "India", "Australia"],
-                potential: "Asia-Pacific business networks and partnerships"
+                description: "Singapore experience + English (native) and Mandarin (conversational) unlock:",
+                countries: ["Malaysia", "Indonesia", "Philippines", "Thailand", "Vietnam", "India", "Australia", "China", "Taiwan", "Hong Kong"],
+                potential: "2.8B+ English & Chinese speakers across Asia-Pacific economic zone"
             }
         },
         korea: {
@@ -520,9 +518,9 @@
             color: 0x38a169,
             languageConnections: {
                 title: "East Asian Cultural Bridge",
-                description: "Korean experience + emerging Korean (basic) creates cultural pathways:",
-                countries: ["South Korea", "Korean communities", "K-culture markets"],
-                potential: "Cultural understanding in Korean business contexts"
+                description: "Korean experience + emerging Korean (basic) creates pathways to:",
+                countries: ["South Korea", "North Korea", "Korean communities worldwide", "K-culture markets", "Samsung/LG ecosystems"],
+                potential: "81M+ Korean speakers, plus global K-culture influence in business"
             }
         },
         japan: {
@@ -535,9 +533,9 @@
             color: 0xd69e2e,
             languageConnections: {
                 title: "Japan Business Gateway",
-                description: "Tokyo internship + advanced Japanese creates unique business advantages:",
-                countries: ["Japan", "Japanese business networks", "EU-Japan corridors"],
-                potential: "Direct access to Japanese corporate culture and practices"
+                description: "Tokyo internship + advanced Japanese creates unique advantages in:",
+                countries: ["Japan", "Japanese business networks", "Asia-Pacific partnerships", "EU-Japan trade corridors"],
+                potential: "128M Japanese speakers + exclusive access to Japanese corporate culture"
             }
         },
         kenya: {
@@ -550,9 +548,9 @@
             color: 0x805ad5,
             languageConnections: {
                 title: "African Market Potential",
-                description: "Kenya experience + English (native) enables expansion across English-speaking Africa:",
-                countries: ["Kenya", "Tanzania", "Uganda", "Ghana", "Nigeria", "South Africa"],
-                potential: "Access to rapidly growing African markets"
+                description: "Kenya experience + English (native) enables expansion across:",
+                countries: ["Kenya", "Tanzania", "Uganda", "Rwanda", "Ghana", "Nigeria", "South Africa", "Botswana", "Zambia"],
+                potential: "600M+ English speakers across African growth markets"
             }
         }
     };
@@ -769,19 +767,18 @@
             `;
 
             languageSection.innerHTML = `
-                <h4 style="margin: 0 0 10px; color: var(--accent-blue); font-size: 0.95rem; font-weight: 600;">
+                <h4 style="margin: 0 0 10px; color: var(--accent-blue); font-size: 1rem; font-weight: 600;">
                     🌐 ${languageInfo.title}
                 </h4>
-                <p style="margin: 0 0 10px; font-size: 0.85rem; line-height: 1.4; color: var(--light-gray);">
+                <p style="margin: 0 0 12px; font-size: 0.9rem; line-height: 1.4; color: var(--light-gray);">
                     ${languageInfo.description}
                 </p>
-                <div style="margin-bottom: 10px;">
-                    ${languageInfo.countries.slice(0, 6).map(country =>
-                `<span style="display: inline-block; margin: 2px 3px 0 0; padding: 2px 6px; background: rgba(255,255,255,0.1); border-radius: 6px; font-size: 0.7rem; color: var(--soft-white);">${country}</span>`
+                <div style="margin-bottom: 12px;">
+                    ${languageInfo.countries.map(country =>
+                `<span style="display: inline-block; margin: 2px 4px 0 0; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.75rem; color: var(--soft-white);">${country}</span>`
             ).join('')}
-                    ${languageInfo.countries.length > 6 ? '<span style="font-size: 0.7rem; color: var(--accent-blue-light);">+more</span>' : ''}
                 </div>
-                <div style="font-size: 0.8rem; color: var(--accent-blue-light); font-weight: 500; font-style: italic;">
+                <div style="font-size: 0.85rem; color: var(--accent-blue-light); font-weight: 500; font-style: italic;">
                     💼 ${languageInfo.potential}
                 </div>
             `;
