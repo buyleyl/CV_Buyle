@@ -6,10 +6,10 @@
 }
 
 :root {
-    --primary-navy: #5c6d7c;
-    --secondary-navy: #7a8b99;
-    --accent-blue: #7a9bae;
-    --accent-blue-light: #a3b6c3;
+    --primary-navy: #6d7c8a;         /* 主蓝灰 */
+    --secondary-navy: #748496;       /* 柔化副色 */
+    --accent-blue: #7a9bae;          /* 高亮蓝 */
+    --accent-blue-light: #a3b6c3;    /* 浅高亮 */
 
     --soft-white: #f5f6f8;
     --light-gray: #e9ecef;
@@ -206,7 +206,7 @@ body {
 
 .hero {
     padding: 80px 0;
-    background: var(--soft-white);
+    background: linear-gradient(180deg, #f8f9fb 0%, #f0f3f8 100%);
     min-height: 90vh;
     display: flex;
     align-items: center;
@@ -303,16 +303,18 @@ body {
 }
 
 .hero-cta.secondary {
-    background: var(--soft-white);
+    background: white;
     color: var(--accent-blue);
     border: 2px solid var(--accent-blue);
     box-shadow: 0 4px 16px rgba(122,147,184,0.1);
 }
 
 .hero-cta.secondary:hover {
-    background: var(--accent-blue);
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-light));
     color: #fff;
+    border: 2px solid transparent;
     transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(122, 147, 184, 0.3);
 }
 
 .cta-text {
@@ -749,7 +751,6 @@ body {
     min-height: 500px;
 }
 
-/* Timeline Sidebar */
 .timeline-sidebar {
     position: relative;
 }
@@ -765,11 +766,12 @@ body {
     top: 80px;
     bottom: 80px;
     width: 2px;
-    background: linear-gradient(to bottom,
-    transparent 0%,
-    #374151 10%,
-    #374151 90%,
-    transparent 100%
+    background: linear-gradient(
+            to bottom,
+            transparent 0%,
+            var(--accent-blue) 10%,
+            var(--accent-blue) 90%,
+            transparent 100%
     );
 }
 
@@ -780,23 +782,24 @@ body {
     gap: 1rem;
     padding: 1rem;
     margin-bottom: 1.5rem;
-    border-radius: 12px;
+    border-radius: var(--border-radius-lg);
     cursor: pointer;
     transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(122, 147, 184, 0.06);
+    border: 1px solid rgba(122, 147, 184, 0.12);
+    box-shadow: var(--shadow-soft);
 }
 
 .nav-node:hover {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(122, 147, 184, 0.12);
     transform: translateX(4px);
 }
 
 .nav-node.active {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(122, 147, 184, 0.2);
+    border-color: var(--accent-blue-light);
     transform: translateX(8px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-medium);
 }
 
 .nav-node.active::before {
@@ -807,9 +810,9 @@ body {
     transform: translateY(-50%);
     width: 12px;
     height: 12px;
-    background: #f3f4f6;
+    background: var(--soft-white);
     border-radius: 50%;
-    box-shadow: 0 0 0 4px var(--primary-navy);
+    box-shadow: 0 0 0 4px var(--accent-blue);
 }
 
 .node-flag {
@@ -820,23 +823,23 @@ body {
 
 .node-year {
     font-size: 0.85rem;
-    color: #6b7280;
+    color: var(--text-secondary);
     font-weight: 600;
     margin-bottom: 0.2rem;
 }
 
 .node-title {
     font-size: 0.9rem;
-    color: #374151;
+    color: var(--text-primary);
     font-weight: 600;
 }
 
 .nav-node.active .node-year {
-    color: #4b5563;
+    color: var(--accent-blue);
 }
 
 .nav-node.active .node-title {
-    color: #1f2937;
+    color: var(--primary-navy);
 }
 
 /* Timeline Content */
@@ -1923,6 +1926,10 @@ body {
         font-size: 14px;
     }
 
+    .journey-path {
+        display: none;
+    }
+
     .hero-stats {
         grid-template-columns: repeat(2, 1fr);
         gap: 16px;
@@ -1945,25 +1952,48 @@ body {
         font-size: 1.1rem;
     }
 
-    .experience-timeline {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
+    @media (max-width: 768px) {
+        .experience-timeline {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
 
-    .timeline-sidebar {
-        order: 1;
-    }
+        .timeline-sidebar {
+            order: 1;
+        }
 
-    .timeline-content {
-        order: 2;
-    }
+        .timeline-content {
+            order: 2;
+        }
 
-    .journey-path {
-        display: none;
-    }
 
-    .nav-node {
-        margin-bottom: 1rem;
+        .nav-node {
+            margin-bottom: 1rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-node::after {
+            content: 'Click to view details';
+            position: absolute;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            white-space: nowrap;
+            margin-left: 12px;
+            background: rgba(72, 100, 170, 0.85);
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-node:hover::after {
+            opacity: 1;
+        }
     }
 
     .experience-card {
