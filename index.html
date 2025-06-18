@@ -425,14 +425,18 @@
             line-height: 1.6;
         }
 
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
         .hero-cta {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
-            color: var(--text-light);
-            text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             text-transform: uppercase;
@@ -440,6 +444,18 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+        }
+
+        .hero-cta.primary {
+            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
+            color: var(--text-light);
+        }
+
+        .hero-cta.secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
         }
 
         .hero-cta::before {
@@ -457,18 +473,134 @@
             left: 100%;
         }
 
-        .hero-cta:hover {
+        .hero-cta.primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(22, 119, 179, 0.4);
         }
 
-        /* Hero Photo Section */
+        .hero-cta.secondary:hover {
+            background: var(--primary-blue);
+            color: var(--text-light);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(22, 119, 179, 0.4);
+        }
+
+        /* Hero Photo Carousel */
         .hero-photo-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1.5rem;
             justify-self: center;
+        }
+
+        .hero-photo-carousel {
+            position: relative;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--glass-bg);
+            border: 3px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 20px rgba(22, 119, 179, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .hero-photo-carousel:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 40px rgba(22, 119, 179, 0.4);
+        }
+
+        .hero-photo-carousel::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--primary-blue), transparent, var(--primary-blue));
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hero-photo-carousel:hover::before {
+            opacity: 1;
+        }
+
+        .carousel-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            cursor: pointer;
+        }
+
+        .carousel-slide.active {
+            opacity: 1;
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            gap: 8px;
+            margin-top: 1rem;
+        }
+
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-dot.active {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 10px rgba(22, 119, 179, 0.6);
+            transform: scale(1.2);
+        }
+
+        .carousel-dot:hover {
+            background: rgba(22, 119, 179, 0.7);
+            transform: scale(1.1);
+        }
+
+        .carousel-caption {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        .carousel-slide:hover .carousel-caption {
+            opacity: 1;
         }
 
         .hero-photo {
@@ -1305,10 +1437,19 @@
                 margin-top: 2rem;
             }
 
-            .hero-photo {
+            .hero-photo-carousel {
                 width: 220px;
                 height: 220px;
                 margin: 0 auto;
+            }
+
+            .carousel-indicators {
+                justify-content: center;
+            }
+
+            .carousel-caption {
+                font-size: 0.6rem;
+                padding: 3px 8px;
             }
 
             .hero-stats {
@@ -1426,9 +1567,18 @@
                 font-size: 1rem;
             }
 
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
             .hero-cta {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
             }
 
             .floating-journey-cta {
@@ -1512,16 +1662,35 @@
                 <div class="hero-subtitle">International Bridge Builder</div>
                 <h1 class="hero-title">Connecting People, Policies & Markets</h1>
                 <p class="hero-description">From Singapore military precision to Japanese market entry, from Korean cultural exchange to Kenyan sustainability projects — I turn complex international challenges into aligned solutions.</p>
-                <a href="#contact" class="hero-cta hover-effect">
-                    Let's Connect
-                    <span>→</span>
-                </a>
+                <div class="hero-cta-group">
+                    <a href="global-journey.html" class="hero-cta primary hover-effect" target="_blank">
+                        🌍 See My Global Journey
+                    </a>
+                    <a href="#contact" class="hero-cta secondary hover-effect">
+                        Let's Connect
+                        <span>→</span>
+                    </a>
+                </div>
             </div>
             <div class="hero-photo-container">
-                <div class="hero-photo" onclick="openPhotoModal()">
-                    <div class="photo-placeholder">
+                <div class="hero-photo-carousel">
+                    <div class="carousel-slide active">
                         <img src="Profile.jpeg" alt="Professional Headshot">
+                        <div class="carousel-caption">Professional Profile</div>
                     </div>
+                    <div class="carousel-slide">
+                        <img src="Japan1.jpeg" alt="In Japan - Business Experience">
+                        <div class="carousel-caption">Tokyo Business Experience</div>
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="Japan2.jpeg" alt="In Japan - Cultural Experience">
+                        <div class="carousel-caption">Japanese Cultural Immersion</div>
+                    </div>
+                </div>
+                <div class="carousel-indicators">
+                    <div class="carousel-dot active" data-slide="0"></div>
+                    <div class="carousel-dot" data-slide="1"></div>
+                    <div class="carousel-dot" data-slide="2"></div>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-card">
@@ -1652,12 +1821,12 @@
                             <div class="language-info">
                                 <span class="language-flag">🇨🇳</span>
                                 <span class="language-name">Mandarin</span>
-                                <span class="language-level">(Basic+)</span>
+                                <span class="language-level">(Conversational)</span>
                             </div>
                             <div class="language-dots">
                                 <div class="dot filled"></div>
                                 <div class="dot filled"></div>
-                                <div class="dot empty"></div>
+                                <div class="dot filled"></div>
                                 <div class="dot empty"></div>
                                 <div class="dot empty"></div>
                             </div>
@@ -2185,67 +2354,52 @@
             `;
         document.head.appendChild(style);
 
-        // Photo upload functionality
-        window.openPhotoModal = function() {
-            document.getElementById('photoModal').classList.add('active');
-        };
+        // Hero Photo Carousel
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.carousel-slide');
+        const dots = document.querySelectorAll('.carousel-dot');
+        const totalSlides = slides.length;
 
-        window.closePhotoModal = function() {
-            document.getElementById('photoModal').classList.remove('active');
-        };
+        function showSlide(index) {
+            // Remove active class from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
 
-        window.triggerFileInput = function() {
-            document.getElementById('photoInput').click();
-        };
+            // Add active class to current slide and dot
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
 
-        // File upload handling
-        const photoInput = document.getElementById('photoInput');
-        const uploadArea = document.getElementById('uploadArea');
+            currentSlide = index;
+        }
 
-        photoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                handlePhotoUpload(file);
-            }
+        function nextSlide() {
+            const next = (currentSlide + 1) % totalSlides;
+            showSlide(next);
+        }
+
+        // Auto-advance slides every 4 seconds
+        let carouselInterval = setInterval(nextSlide, 4000);
+
+        // Dot click handlers
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+                // Reset interval when user manually changes slide
+                clearInterval(carouselInterval);
+                carouselInterval = setInterval(nextSlide, 4000);
+            });
         });
 
-        // Drag and drop
-        uploadArea.addEventListener('dragover', function(e) {
-            e.preventDefault();
-            uploadArea.classList.add('drag-over');
-        });
+        // Pause on hover
+        const carousel = document.querySelector('.hero-photo-carousel');
+        if (carousel) {
+            carousel.addEventListener('mouseenter', () => {
+                clearInterval(carouselInterval);
+            });
 
-        uploadArea.addEventListener('dragleave', function(e) {
-            e.preventDefault();
-            uploadArea.classList.remove('drag-over');
-        });
-
-        uploadArea.addEventListener('drop', function(e) {
-            e.preventDefault();
-            uploadArea.classList.remove('drag-over');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-                handlePhotoUpload(file);
-            }
-        });
-
-        uploadArea.addEventListener('click', function() {
-            photoInput.click();
-        });
-
-        function handlePhotoUpload(file) {
-            if (file.size > 5 * 1024 * 1024) {
-                alert('File size must be less than 5MB');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const heroPhoto = document.querySelector('.hero-photo');
-                heroPhoto.innerHTML = `<img src="${e.target.result}" alt="Professional Headshot">`;
-                closePhotoModal();
-            };
-            reader.readAsDataURL(file);
+            carousel.addEventListener('mouseleave', () => {
+                carouselInterval = setInterval(nextSlide, 4000);
+            });
         }
     });
 
