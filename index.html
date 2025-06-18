@@ -1,1348 +1,936 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Berend Buyle - International business consultant specializing in cross-cultural communication, policy writing, and stakeholder engagement across Asia-Europe markets.">
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Berend Buyle - Connecting People, Policies & Markets">
-    <meta property="og:description" content="From Singapore Air Force logistics to supporting Flemish companies in Japan - bridging cultures and transforming complex ideas into winning narratives.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourdomain.com/">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:image" content="https://yourdomain.com/assets/berend-og-cover.webp">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Berend Buyle - Connecting People, Policies & Markets">
-    <meta name="twitter:description" content="From Singapore Air Force logistics to supporting Flemish companies in Japan – bridging cultures and transforming complex ideas into winning narratives.">
-    <meta name="twitter:image" content="https://yourdomain.com/assets/berend-og-cover.webp">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Berend Buyle - International Bridge Builder</title>
+    <meta name="description" content="International business consultant specializing in cross-cultural communication, policy writing, and stakeholder engagement across Asia-Europe markets.">
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-    <!-- Icons -->
-    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <!-- Preload cover image -->
-    <link rel="preload" as="image" href="/assets/berend-og-cover.webp" type="image/webp">
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="styles.css">
-
-    <!-- 3D Dependencies -->
+    <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three-globe"></script>
     <script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
-</head>
-
-<body>
-<!-- Scroll Progress Indicator -->
-<div class="scroll-progress">
-    <div class="scroll-progress-bar" id="scrollProgress"></div>
-</div>
-
-<!-- 浮动3D Journey按钮 - 替换原来的浮动CTA -->
-<div class="floating-journey-cta" id="floatingJourney" title="Explore My Global Journey">
-    <div class="floating-icon">🌍</div>
-    <div class="floating-text">
-        <span class="floating-title">Journey</span>
-        <span class="floating-subtitle">Explore</span>
-    </div>
-</div>
-
-<!-- Mobile Menu Button -->
-<button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
-
-<!-- Sidebar Navigation -->
-<aside class="sidebar" id="sidebar">
-    <div class="sidebar-logo">
-        <h2>Berend</h2>
-    </div>
-    <nav class="sidebar-nav">
-        <ul class="nav-menu">
-            <li><a class="nav-link active" data-section="home">Home</a></li>
-            <li><a class="nav-link" data-section="about">About</a></li>
-            <li><a class="nav-link" data-section="experience">Experience</a></li>
-            <li><a class="nav-link" data-section="projects">Projects</a></li>
-            <li><a class="nav-link" data-section="writing">Writing</a></li>
-            <li><a class="nav-link" data-section="contact">Contact</a></li>
-        </ul>
-    </nav>
-    <div class="sidebar-social">
-        <div class="social-links">
-            <a href="https://www.linkedin.com/in/berend-buyle-7611a9225/" title="LinkedIn" aria-label="Visit Berend's LinkedIn profile">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-                </svg>
-            </a>
-            <a href="mailto:berend.buyle@gmail.com" title="Email" aria-label="Send email to Berend">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-.904.732-1.636 1.636-1.636h1.535L12 11.602l8.829-7.781h1.535c.904 0 1.636.732 1.636 1.636z"/>
-                </svg>
-            </a>
-            <a href="https://github.com/buyleyl" title="GitHub" aria-label="Visit Berend's GitHub profile">
-                <svg viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-                </svg>
-            </a>
-        </div>
-        <div class="sidebar-footer">
-            Copyright ©2025 Berend Buyle.<br>All rights reserved.
-        </div>
-    </div>
-</aside>
-
-<!-- Main Content -->
-<main class="main-content">
-    <!-- Home Section - Improved -->
-    <section id="home" class="section hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Connecting <span>People</span>,<br><span>Policies</span> & <span>Markets</span></h1>
-                    <p class="subtitle">From Singapore military precision to Japanese market entry, from Korean cultural exchange to Kenyan sustainability projects — <strong>I turn complex international challenges into aligned solutions.</strong></p>
-
-                    <!-- Improved CTA Buttons -->
-                    <div class="hero-cta-group">
-                        <a href="global-journey.html" class="hero-cta primary" target="_blank">
-                            <span class="cta-text">See My Global Journey</span>
-                        </a>
-                        <a class="hero-cta secondary nav-link" data-section="contact">
-                            <span class="cta-text">Let's Connect</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="hero-photo" onclick="uploadHeroPhoto()">
-                    <div class="photo-placeholder">
-                        <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
-                        <strong>Add Photo</strong><br>
-                        <small style="color: rgba(255,255,255,0.7);">Professional headshot</small>
-                    </div>
-                </div>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Languages</div></div>
-                <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Countries</div></div>
-                <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Continents</div></div>
-                <div class="stat-item"><div class="stat-number">2.5</div><div class="stat-label">Years in Intl Business</div></div>
-            </div>
-        </div>
-    </section>
-    <!-- About Section -  -->
-    <!-- About Section - Clean & Professional -->
-    <section id="about" class="section about">
-        <div class="container">
-            <!-- Hero Statement -->
-            <div class="about-hero">
-                <h2 class="about-title">I'm the bridge builder</h2>
-                <p class="about-subtitle">Who turns complex multi-stakeholder challenges into aligned, actionable solutions — from Singapore military logistics to Flemish diplomacy in Japan</p>
-            </div>
-
-            <!-- Core Content Grid -->
-            <div class="about-content">
-                <!-- Left Column: Key Information -->
-                <div class="about-main">
-                    <!-- Approach -->
-                    <div class="approach-section">
-                        <h3>How I Approach Complex Challenges</h3>
-                        <p class="approach-intro">International collaboration isn't just about translation—it's about aligning logics, incentives, and stories across borders.</p>
-
-                        <div class="approach-steps">
-                            <div class="step">
-                                <div class="step-number">1</div>
-                                <div class="step-content">
-                                    <h4>Decode the System</h4>
-                                    <p>Understanding institutional logic, cultural context, and unspoken dynamics beyond surface requirements.</p>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">2</div>
-                                <div class="step-content">
-                                    <h4>Map the Stakeholders</h4>
-                                    <p>Identifying how different groups think, what they value, and how they make decisions across cultural contexts.</p>
-                                </div>
-                            </div>
-                            <div class="step">
-                                <div class="step-number">3</div>
-                                <div class="step-content">
-                                    <h4>Build the Bridge</h4>
-                                    <p>Creating frameworks that align diverse requirements into coherent strategies everyone can support.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <!-- Core Strengths -->
-                    <div class="strengths-section">
-                        <h3>What Makes Me Different</h3>
-                        <div class="strengths-grid">
-                            <div class="strength-card">
-                                <h4>Institutional Logic Focus</h4>
-                                <p>I focus on <em>how</em> institutions think, not just <em>what</em> they want. This perspective shift turns complex requirements into winning strategies.</p>
-                                <div class="strength-example">Japan: Understanding institutional interpretation led to better market entry strategies</div>
-                            </div>
-                            <div class="strength-card">
-                                <h4>Cultural Code-Switching</h4>
-                                <p>I think in multiple cultural frameworks, crafting messages that resonate authentically with diverse stakeholder groups.</p>
-                                <div class="strength-example">Seoul exchange: Gained Asian institutional insights for international coordination</div>
-                            </div>
-                            <div class="strength-card">
-                                <h4>Systems Thinking</h4>
-                                <p>Military training taught me to balance granular attention to detail with strategic overview—essential for stakeholder alignment.</p>
-                                <div class="strength-example">Singapore: Coordinated mission-critical operations requiring precision and adaptability</div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <!-- Working Style -->
-                    <div class="working-style">
-                        <h3>How I Work Best</h3>
-                        <div class="work-attributes">
-                            <div class="work-item">
-                                <span class="work-label">Communication:</span>
-                                <span class="work-value">Direct but culturally sensitive, clear frameworks with room for adaptation</span>
-                            </div>
-                            <div class="work-item">
-                                <span class="work-label">Problem-Solving:</span>
-                                <span class="work-value">Systematic research → Stakeholder mapping → Iterative solution building</span>
-                            </div>
-                            <div class="work-item">
-                                <span class="work-label">Environment:</span>
-                                <span class="work-value">Cross-functional teams, international contexts, high-stakes challenges</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Visual & Summary -->
-                <div class="about-sidebar">
-                    <!-- Professional Photo -->
-                    <div class="about-photo" onclick="uploadAboutPhoto()">
-                        <div class="photo-placeholder">
-                            <div style="font-size: 1.8rem; margin-bottom: 10px;">📸</div>
-                            <strong>Professional Photo</strong><br>
-                            <small style="color: #999; margin-top: 8px;">Click to add</small>
-                        </div>
-                    </div>
-
-                    <!-- Key Drivers -->
-                    <div class="drivers-section">
-                        <h4>What Drives Me</h4>
-                        <div class="drivers-list">
-                            <div class="driver-item">
-                                <h5>Global Perspective, Local Impact</h5>
-                                <p>Translating between international expertise and local wisdom.</p>
-                                <small>Kenya: 100% local ownership meeting international standards</small>
-                            </div>
-                            <div class="driver-item">
-                                <h5>Complexity as Opportunity</h5>
-                                <p>Where others see problems, I see puzzle pieces to arrange.</p>
-                                <small>Unified 5-stakeholder Kenya project strategy</small>
-                            </div>
-                            <div class="driver-item">
-                                <h5>Precision with Adaptability</h5>
-                                <p>Systematic preparation adapted to unique contexts.</p>
-                                <small>Culturally-adapted compliance for Japanese market</small>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Value Proposition -->
-                    <div class="value-prop">
-                        <h4>Why This Matters</h4>
-                        <p>When facing complex international challenges—market entry, stakeholder alignment, policy development—you need someone who understands the deeper dynamics at play.</p>
-                        <p><strong>I turn complexity into clarity, and diverse requirements into unified action.</strong></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <style>
-        /* Hero Section */
-        .about-hero {
-            text-align: center;
-            margin-bottom: 4rem;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .about-title {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
+        :root {
+            --primary-blue: #1677B3;
+            --primary-dark: #0f1419;
+            --text-light: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-bg: rgba(255, 255, 255, 0.05);
         }
 
-        .about-subtitle {
-            font-size: 1.2rem;
-            color: #475569;
-            line-height: 1.5;
-            max-width: 700px;
-            margin: 0 auto;
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* Main Content Grid */
-        .about-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 4rem;
-            align-items: start;
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        .about-main h3 {
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
+        /* WebGL Canvas */
+        #main-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
         }
 
-        /* Approach Section */
-        .approach-section {
-            margin-bottom: 3rem;
-        }
-
-        .approach-intro {
-            color: #64748b;
-            font-style: italic;
-            margin-bottom: 2rem;
-            font-size: 1.05rem;
-            line-height: 1.5;
-        }
-
-        .approach-steps {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .step {
-            display: flex;
-            gap: 1rem;
-            align-items: flex-start;
-        }
-
-        .step-number {
-            width: 32px;
-            height: 32px;
-            background: #475569;
-            color: white;
-            border-radius: 50%;
+        /* Loading Animation */
+        .loading-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-dark);
+            z-index: 1000;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-            margin-top: 2px;
+            flex-direction: column;
+            transition: opacity 1s ease;
         }
 
-        .step-content h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
+        .loading-container.hidden {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .step-content p {
-            color: #475569;
-            line-height: 1.5;
-            font-size: 0.95rem;
-        }
-
-        /* Strengths Section */
-        .strengths-section {
-            margin-bottom: 3rem;
-        }
-
-        .strengths-grid {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .strength-card {
-            padding: 1.5rem;
-            background: rgba(248, 250, 252, 0.8);
-            border: 1px solid rgba(71, 85, 105, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .strength-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .strength-card h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.8rem;
-        }
-
-        .strength-card p {
-            color: #475569;
-            line-height: 1.5;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
-        }
-
-        .strength-example {
-            background: rgba(16, 185, 129, 0.08);
-            border-left: 3px solid #10b981;
-            padding: 0.8rem;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            color: #374151;
-            font-weight: 500;
-        }
-
-        /* Working Style */
-        .working-style {
-            background: rgba(71, 85, 105, 0.03);
-            padding: 2rem;
-            border-radius: 12px;
-        }
-
-        .work-attributes {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .work-item {
-            display: flex;
-            gap: 0.8rem;
-            align-items: flex-start;
-        }
-
-        .work-label {
-            font-weight: 600;
-            color: #334155;
-            min-width: 120px;
-            font-size: 0.9rem;
-        }
-
-        .work-value {
-            color: #475569;
-            line-height: 1.5;
-            font-size: 0.9rem;
-        }
-
-        /* Sidebar */
-        .about-sidebar {
-            position: sticky;
-            top: 2rem;
-        }
-
-        .about-sidebar h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 1rem;
-        }
-
-        /* Photo */
-        .about-photo {
-            width: 100%;
-            height: 280px;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 2px dashed rgba(71, 85, 105, 0.2);
+        .loading-logo {
+            width: 100px;
+            height: 100px;
             margin-bottom: 2rem;
+            position: relative;
         }
 
-        .about-photo:hover {
-            border-color: rgba(71, 85, 105, 0.4);
-            transform: translateY(-2px);
+        .loading-logo::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loading-logo::after {
+            content: 'B';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Main Container */
+        .main-container {
+            position: relative;
+            z-index: 10;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background:  rgba(15, 20, 25, 0);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            padding: 1rem 2rem;
+            background: rgba(15, 20, 25, 0.95);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            z-index: 101;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        /* Creative Hamburger Menu */
+        .menu-toggle {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 12px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            z-index: 101;
+            position: relative;
+        }
+
+        .menu-toggle:hover {
+            background: rgba(22, 119, 179, 0.15);
+            border-color: rgba(22, 119, 179, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(22, 119, 179, 0.2);
+        }
+
+        .menu-bar {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .menu-toggle.active {
+            background: rgba(22, 119, 179, 0.2);
+            border-color: var(--primary-blue);
+        }
+
+        .menu-toggle.active .menu-bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+            background: var(--primary-blue);
+        }
+
+        .menu-toggle.active .menu-bar:nth-child(2) {
+            opacity: 0;
+            transform: scaleX(0);
+        }
+
+        .menu-toggle.active .menu-bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+            background: var(--primary-blue);
+        }
+
+        /* Full Screen Navigation Menu */
+        .nav-menu {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 20, 25, 0.95);
+            backdrop-filter: blur(30px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(1.1);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        /* Add subtle animation overlay */
+        .nav-menu::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(22, 119, 179, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            pointer-events: none;
+        }
+
+        .nav-menu.active::before {
+            opacity: 1;
+        }
+
+        .nav-menu-item {
+            margin: 1rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+        }
+
+        .nav-menu.active .nav-menu-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .nav-menu.active .nav-menu-item:nth-child(1) { transition-delay: 0.1s; }
+        .nav-menu.active .nav-menu-item:nth-child(2) { transition-delay: 0.2s; }
+        .nav-menu.active .nav-menu-item:nth-child(3) { transition-delay: 0.3s; }
+        .nav-menu.active .nav-menu-item:nth-child(4) { transition-delay: 0.4s; }
+        .nav-menu.active .nav-menu-item:nth-child(5) { transition-delay: 0.5s; }
+
+        .nav-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            padding: 1rem 2rem;
+            display: block;
+            text-align: center;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-blue);
+            text-shadow: 0 0 30px rgba(22, 119, 179, 0.6);
+            transform: scale(1.1);
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: var(--primary-blue);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::before,
+        .nav-link.active::before {
+            width: 80%;
+        }
+
+        /* Menu Footer Info */
+        .menu-footer {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            opacity: 0;
+            transition: all 0.4s ease 0.6s;
+        }
+
+        .nav-menu.active .menu-footer {
+            opacity: 1;
+        }
+
+        .menu-contact {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .menu-contact a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .menu-contact a:hover {
+            text-shadow: 0 0 10px rgba(22, 119, 179, 0.5);
+        }
+
+        .menu-languages {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .language-tag {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Hide traditional navigation on all screen sizes */
+        .nav-menu-traditional {
+            display: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            padding: 0 2rem;
+            padding-top: 6rem;
+        }
+
+        .hero-content {
+            max-width: 1000px;
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 4rem;
+            align-items: center;
+            animation: fadeInUp 1s ease 0.5s both;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
+            color: var(--text-light);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-cta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-cta:hover::before {
+            left: 100%;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(22, 119, 179, 0.4);
+        }
+
+        /* Hero Photo Section */
+        .hero-photo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            justify-self: center;
+        }
+
+        .hero-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 3px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 20px rgba(22, 119, 179, 0.1);
+        }
+
+        .hero-photo:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 40px rgba(22, 119, 179, 0.4);
+        }
+
+        .hero-photo::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, var(--primary-blue), transparent, var(--primary-blue));
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .hero-photo:hover::before {
+            opacity: 1;
+        }
+
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            transition: all 0.3s ease;
         }
 
         .photo-placeholder {
-            width: 100%;
-            height: 100%;
+            text-align: center;
+            color: var(--text-muted);
+            padding: 2rem;
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 2rem;
         }
 
-        .about-photo.has-photo {
-            border-style: solid;
-            border-color: rgba(71, 85, 105, 0.15);
+        .photo-placeholder:hover {
+            color: var(--primary-blue);
+            transform: scale(1.05);
         }
 
-        .about-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Drivers Section */
-        .drivers-section {
-            margin-bottom: 2rem;
-        }
-
-        .drivers-list {
-            display: grid;
-            gap: 1.5rem;
-        }
-
-        .driver-item {
-            padding: 1rem;
-            background: rgba(248, 250, 252, 0.5);
-            border-radius: 8px;
-            border: 1px solid rgba(71, 85, 105, 0.08);
-        }
-
-        .driver-item h5 {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 0.5rem;
-        }
-
-        .driver-item p {
-            color: #475569;
-            font-size: 0.85rem;
-            line-height: 1.4;
-            margin-bottom: 0.5rem;
-        }
-
-        .driver-item small {
-            color: #059669;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        /* Value Proposition */
-        .value-prop {
-            background: rgba(71, 85, 105, 0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(71, 85, 105, 0.1);
-        }
-
-        .value-prop p {
-            color: #475569;
-            line-height: 1.5;
+        .photo-upload-icon {
+            font-size: 3rem;
             margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .photo-upload-text {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .photo-upload-hint {
             font-size: 0.9rem;
+            opacity: 0.8;
         }
 
-        .value-prop p:last-child {
-            margin-bottom: 0;
-        }
-
-        .value-prop strong {
-            color: #1e293b;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .about-sidebar {
-                position: relative;
-                top: auto;
-                order: -1;
-            }
-
-            .about-photo {
-                max-width: 300px;
-                margin: 0 auto 2rem;
-            }
-
-            .drivers-list {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .about-title {
-                font-size: 2.2rem;
-            }
-
-            .about-subtitle {
-                font-size: 1.1rem;
-            }
-
-            .step {
-                flex-direction: column;
-                text-align: center;
-                gap: 0.8rem;
-            }
-
-            .work-item {
-                flex-direction: column;
-                gap: 0.3rem;
-            }
-
-            .work-label {
-                font-weight: 700;
-                color: #1e293b;
-                min-width: auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .about-hero {
-                margin-bottom: 3rem;
-            }
-
-            .about-main h3 {
-                font-size: 1.4rem;
-            }
-
-            .strength-card, .value-prop, .working-style {
-                padding: 1.25rem;
-            }
-        }
-    </style>
-
-    <script>
-        // Photo upload functionality
-        window.uploadAboutPhoto = function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-
-            input.onchange = function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const photoContainer = document.querySelector('.about-photo');
-
-                        // Replace placeholder with image
-                        photoContainer.innerHTML = `<img src="${e.target.result}" alt="Berend Buyle - Professional photo">`;
-                        photoContainer.classList.add('has-photo');
-
-                        // Keep upload functionality
-                        photoContainer.onclick = uploadAboutPhoto;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            input.click();
-        };
-    </script>
-
-    <!-- Experience Section -->
-    <!-- Experience Section - Compact & Stylish -->
-    <section id="experience" class="section experience">
-        <div class="container">
-            <div class="section-intro">
-                <h2 class="section-title">Professional Journey</h2>
-            </div>
-
-            <!-- Compact Timeline Layout -->
-            <div class="experience-timeline">
-                <!-- Left Column: Navigation -->
-                <div class="timeline-sidebar">
-                    <div class="journey-path">
-                        <div class="path-line"></div>
-                        <div class="nav-node active" data-index="0">
-                            <div class="node-flag">🇸🇬</div>
-                            <div class="node-year">2019-21</div>
-                            <div class="node-title">Military</div>
-                        </div>
-                        <div class="nav-node" data-index="1">
-                            <div class="node-flag">🇧🇪</div>
-                            <div class="node-year">2021-25</div>
-                            <div class="node-title">Studies</div>
-                        </div>
-                        <div class="nav-node" data-index="2">
-                            <div class="node-flag">🇰🇷</div>
-                            <div class="node-year">2023</div>
-                            <div class="node-title">Exchange</div>
-                        </div>
-                        <div class="nav-node" data-index="3">
-                            <div class="node-flag">🇯🇵</div>
-                            <div class="node-year">2024</div>
-                            <div class="node-title">Internship</div>
-                        </div>
-                        <div class="nav-node" data-index="4">
-                            <div class="node-flag">🇰🇪</div>
-                            <div class="node-year">Present</div>
-                            <div class="node-title">Project</div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Right Column: Content -->
-                <div class="timeline-content">
-                    <div class="experience-card active" data-index="0">
-                        <div class="card-badge">Military Experience</div>
-                        <h3 class="card-title">Transport Operator</h3>
-                        <div class="card-company">Singapore Air Force</div>
-                        <div class="card-period">Sep 2019 - Aug 2021 • Singapore</div>
-
-                        <div class="card-description">
-                            Led logistics operations requiring coordination between multiple departments, strict adherence to protocols, and real-time problem-solving under pressure. Responsible for ensuring mission-critical operations met exact specifications.
-                        </div>
-
-                        <div class="card-impact">
-                            <span class="impact-label">Key Insight:</span>
-                            Successful outcomes depend on understanding institutional logic, not just procedures — enabling proactive problem-solving in high-stakes environments.
-                        </div>
-
-                        <div class="card-tags">
-                            <span class="tag primary">Crisis Leadership</span>
-                            <span class="tag secondary">Real-time Problem Solving</span>
-                        </div>
-                    </div>
-
-                    <div class="experience-card" data-index="1">
-                        <div class="card-badge">Academic Foundation</div>
-                        <h3 class="card-title">MA Business Economics</h3>
-                        <div class="card-company">KU Leuven</div>
-                        <div class="card-period">2021 - Present • Leuven, Belgium</div>
-
-                        <div class="card-description">
-                            Advanced studies in international business strategy, market analysis, and economic policy with focus on cross-border trade and stakeholder engagement frameworks. Currently developing thesis research on international trade facilitation.
-                        </div>
-
-                        <div class="card-impact">
-                            <span class="impact-label">Key Insight:</span>
-                            Built analytical foundation for understanding complex market dynamics and regulatory environments across different institutional contexts.
-                        </div>
-
-                        <div class="card-tags">
-                            <span class="tag primary">Strategic Analysis</span>
-                            <span class="tag secondary">Policy Writing</span>
-                        </div>
-                    </div>
-
-                    <div class="experience-card" data-index="2">
-                        <div class="card-badge">Cultural Immersion</div>
-                        <h3 class="card-title">Exchange Student</h3>
-                        <div class="card-company">Sungkyunkwan University</div>
-                        <div class="card-period">Aug - Dec 2023 • Seoul, South Korea</div>
-
-                        <div class="card-description">
-                            Specialized in East Asian business practices, international trade dynamics, and cross-cultural organizational behavior in one of Korea's leading business programs.
-                        </div>
-
-                        <div class="card-impact">
-                            <span class="impact-label">Key Insight:</span>
-                            Gained firsthand insights into Asian institutional frameworks and communication styles essential for international project coordination.
-                        </div>
-
-                        <div class="card-tags">
-                            <span class="tag primary">Cross-Cultural Analytics</span>
-                            <span class="tag secondary">Asian Markets</span>
-                        </div>
-                    </div>
-
-                    <div class="experience-card" data-index="3">
-                        <div class="card-badge">Market Entry</div>
-                        <h3 class="card-title">Business Development Intern</h3>
-                        <div class="card-company">Flanders Investment & Trade</div>
-                        <div class="card-period">Jul - Sep 2024 • Tokyo, Japan</div>
-
-                        <div class="card-description">
-                            Facilitated market entry for Flemish companies in Japan by developing comprehensive briefing materials, conducting regulatory research, and coordinating between European business approaches and Japanese institutional expectations.
-                        </div>
-
-                        <div class="card-impact">
-                            <span class="impact-label">Key Insight:</span>
-                            Market entry success requires understanding how institutions interpret regulations in practice, not just what they say.
-                        </div>
-
-                        <div class="card-tags">
-                            <span class="tag primary">Market Entry Specialist</span>
-                            <span class="tag secondary">Regulatory Navigation</span>
-                        </div>
-                    </div>
-
-                    <div class="experience-card" data-index="4">
-                        <div class="card-badge">Global Impact</div>
-                        <h3 class="card-title">Project Leader</h3>
-                        <div class="card-company">Supetai Kenya Micro Recycling Center</div>
-                        <div class="card-period">2024 - Present • Kenya & Remote</div>
-
-                        <div class="card-description">
-                            Leading international development initiative creating micro recycling center in rural Kenya, aligning international funding criteria, local community needs, environmental standards, and economic sustainability requirements.
-                        </div>
-
-                        <div class="card-impact">
-                            <span class="impact-label">Key Insight:</span>
-                            Successfully coordinated diverse stakeholder requirements into coherent implementation strategy with local ownership model.
-                        </div>
-
-                        <div class="card-tags">
-                            <span class="tag primary">Stakeholder Alignment</span>
-                            <span class="tag secondary">International Funding</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <style>
-        .experience-timeline {
+        /* Photo Stats */
+        .hero-stats {
             display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 3rem;
-            max-width: 1200px;
-            margin: 1.5rem auto;
-            min-height: 500px;
-        }
-
-        /* Timeline Sidebar */
-        .timeline-sidebar {
-            position: relative;
-        }
-
-        .journey-path {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .path-line {
-            position: absolute;
-            left: 30px;
-            top: 80px;
-            bottom: 80px;
-            width: 2px;
-            background: linear-gradient(to bottom,
-            transparent 0%,
-            #374151 10%,
-            #374151 90%,
-            transparent 100%
-            );
-        }
-
-        .nav-node {
-            position: relative;
-            display: flex;
-            align-items: center;
+            grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
             border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-node:hover {
-            background: rgba(255, 255, 255, 0.05);
-            transform: translateX(4px);
-        }
-
-        .nav-node.active {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateX(8px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-node.active::before {
-            content: '';
-            position: absolute;
-            left: -18px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 12px;
-            height: 12px;
-            background: #f3f4f6;
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--bg-primary);
-        }
-
-        .node-flag {
-            font-size: 1.8rem;
-            width: 40px;
+            padding: 1.2rem 1rem;
             text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
         }
 
-        .node-info {
-            flex: 1;
+        .stat-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 25px rgba(22, 119, 179, 0.2);
         }
 
-        .node-year {
-            font-size: 0.85rem;
-            color: #6b7280;
-            font-weight: 600;
-            margin-bottom: 0.2rem;
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 10px rgba(22, 119, 179, 0.5);
+            line-height: 1;
         }
 
-        .node-title {
-            font-size: 0.9rem;
-            color: #374151;
-            font-weight: 600;
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
+            line-height: 1.2;
         }
 
-        .nav-node.active .node-year {
-            color: #4b5563;
-        }
-
-        .nav-node.active .node-title {
-            color: #1f2937;
-        }
-
-        /* Timeline Content */
-        .timeline-content {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .experience-card {
-            position: absolute;
+        /* Photo Upload Modal */
+        .photo-modal {
+            position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(20px);
-            transition: all 0.4s ease;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            padding: 2rem;
-        }
-
-        .experience-card.active {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-            position: relative;
-        }
-
-        .card-badge {
-            display: inline-block;
-            background: rgba(71, 85, 105, 0.12);
-            color: #334155;
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 1rem;
-        }
-
-        .card-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #111827;
-            margin-bottom: 0.5rem;
-        }
-
-        .card-company {
-            font-size: 1.1rem;
-            color: #374151;
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .card-period {
-            font-size: 0.9rem;
-            color: #6b7280;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-description {
-            font-size: 1rem;
-            line-height: 1.6;
-            color: #374151;
-            margin-bottom: 1.5rem;
-        }
-
-        .card-impact {
-            background: rgba(71, 85, 105, 0.08);
-            border-left: 3px solid #475569;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            color: #374151;
-        }
-
-        .impact-label {
-            color: #1f2937;
-            font-weight: 600;
-        }
-
-        .card-tags {
-            display: flex;
-            gap: 0.8rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .tag.primary {
-            background: rgba(96, 165, 250, 0.12);
-            color: #1d4ed8;
-            border: 1px solid rgba(96, 165, 250, 0.25);
-        }
-
-        .tag.secondary {
-            background: rgba(96, 165, 250, 0.06);
-            color: #475569;
-            border: 1px solid rgba(96, 165, 250, 0.15);
-        }
-
-        .tag:hover {
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .experience-timeline {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .timeline-sidebar {
-                order: 2;
-            }
-
-            .timeline-content {
-                order: 1;
-            }
-
-            .journey-path {
-                display: flex;
-                overflow-x: auto;
-                padding: 1rem 0;
-                gap: 1rem;
-            }
-
-            .path-line {
-                display: none;
-            }
-
-            .nav-node {
-                flex-direction: column;
-                text-align: center;
-                min-width: 100px;
-                margin-bottom: 0;
-            }
-
-            .nav-node.active::before {
-                display: none;
-            }
-
-            .node-flag {
-                font-size: 1.5rem;
-                margin-bottom: 0.5rem;
-            }
-
-            .card-title {
-                font-size: 1.5rem;
-            }
-
-            .card-tags {
-                gap: 0.5rem;
-            }
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navNodes = document.querySelectorAll('.nav-node');
-            const experienceCards = document.querySelectorAll('.experience-card');
-
-            // 切换经历显示
-            function showExperience(index) {
-                // 更新导航状态
-                navNodes.forEach((node, i) => {
-                    node.classList.toggle('active', i === index);
-                });
-
-                // 更新卡片显示
-                experienceCards.forEach((card, i) => {
-                    card.classList.toggle('active', i === index);
-                });
-            }
-
-            // 导航点击事件
-            navNodes.forEach((node, index) => {
-                node.addEventListener('click', () => {
-                    showExperience(index);
-                });
-            });
-
-            // 键盘导航
-            document.addEventListener('keydown', (e) => {
-                const activeIndex = Array.from(navNodes).findIndex(node => node.classList.contains('active'));
-
-                if (e.key === 'ArrowUp' && activeIndex > 0) {
-                    showExperience(activeIndex - 1);
-                } else if (e.key === 'ArrowDown' && activeIndex < navNodes.length - 1) {
-                    showExperience(activeIndex + 1);
-                }
-            });
-
-            // 初始化
-            showExperience(0);
-        });
-    </script>
-
-    <!-- Projects Section - Clean & Focused -->
-    <section id="projects" class="section projects">
-        <div class="container">
-            <div class="section-intro">
-                <h2 class="section-title">Current Projects</h2>
-                <p class="section-subtitle">Active initiatives that combine entrepreneurship, sustainability, and international collaboration.</p>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="projects-grid">
-                <!-- Featured Project - Supetai Kenya -->
-                <div class="project-card featured">
-                    <div class="project-media">
-                        <div class="project-image" onclick="uploadProjectPhoto('kenya')">
-                            <div class="photo-placeholder">
-                                <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
-                                <strong>Kenya Project Photo</strong><br>
-                                <small style="color: #999;">Click to add project photo</small>
-                            </div>
-                        </div>
-                        <div class="project-video">
-                            <iframe
-                                    src="https://player.vimeo.com/video/1086067426?title=0&byline=0&portrait=0&autoplay=0"
-                                    allow="autoplay; fullscreen; picture-in-picture"
-                                    allowfullscreen
-                                    title="Supetai Kenya Project Video">
-                            </iframe>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-meta">Featured Project • Social Impact</div>
-                        <h3 class="project-title">Supetai Project - Kenya Micro Recycling Center</h3>
-                        <div class="project-description">
-                            <p>Leading international development initiative creating micro recycling center in rural Kenya, aligning international funding criteria, local community needs, environmental standards, and economic sustainability requirements.</p>
-                            <p style="font-weight: 500; color: #475569; margin-top: 1rem;">One of the key aspects was local ownership, working with community member Issack to ensure the workshop is locally owned and operated.</p>
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Stakeholder Alignment</span>
-                            <span class="tag">International Funding</span>
-                            <span class="tag">Sustainability</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 - Slush'D Event -->
-                <div class="project-card">
-                    <div class="project-image" onclick="uploadProjectPhoto('slush')">
-                        <div class="photo-placeholder">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
-                            <strong>Slush'D Event Photo</strong><br>
-                            <small style="color: #999;">Click to add team/event photo</small>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-meta">Partnership Development</div>
-                        <h3 class="project-title">Ghent Slush'D 2024 - Startup Event</h3>
-                        <div class="project-description">
-                            Partnerships team member responsible for startup outreach and lead generation for 1000+ attendee event at Wintercircus Ghent. Coordinated with founders, investors, and international participants across multiple time zones.
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Event Management</span>
-                            <span class="tag">Partnership Development</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 - Gakusei Forum -->
-                <div class="project-card">
-                    <div class="project-image" onclick="uploadProjectPhoto('gakusei')">
-                        <div class="photo-placeholder">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
-                            <strong>Cultural Exchange</strong><br>
-                            <small style="color: #999;">Click to add event photo</small>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-meta">Community Building</div>
-                        <h3 class="project-title">Leuven Gakusei Forum</h3>
-                        <div class="project-description">
-                            Organizing cultural exchange events between Japanese exchange students and local community. Building bridges across language and cultural barriers through structured programming and relationship-building.
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Cultural Exchange</span>
-                            <span class="tag">Community Building</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4 - Innovation -->
-                <div class="project-card">
-                    <div class="project-image" onclick="uploadProjectPhoto('innovation')">
-                        <div class="photo-placeholder">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
-                            <strong>Innovation Project</strong><br>
-                            <small style="color: #999;">Click to add project photo</small>
-                        </div>
-                    </div>
-                    <div class="project-content">
-                        <div class="project-meta">Sustainability Research</div>
-                        <h3 class="project-title">Product Innovation Project</h3>
-                        <div class="project-description">
-                            Interdisciplinary team member tackling sustainable printing solutions during 2022-23 academic year. Developed comprehensive analysis of environmental impact and proposed systemic improvements.
-                        </div>
-                        <div class="project-tags">
-                            <span class="tag">Sustainability Research</span>
-                            <span class="tag">Innovation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <style>
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .project-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-card.featured {
-            grid-column: span 2;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0;
-        }
-
-        .project-media {
-            display: grid;
-            grid-template-rows: 1fr 1fr;
-            gap: 1px;
-            background: #f1f5f9;
-        }
-
-        .project-image {
-            background: #f8fafc;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 200px;
-            cursor: pointer;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .photo-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .photo-modal-content {
+            background: var(--primary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            backdrop-filter: blur(20px);
+        }
+
+        .photo-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .photo-modal-close:hover {
+            color: var(--text-light);
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 3rem;
+            margin: 1rem 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-blue);
+            background: var(--glass-bg);
+        }
+
+        .upload-area.drag-over {
+            border-color: var(--primary-blue);
+            background: rgba(22, 119, 179, 0.1);
+            transform: scale(1.02);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-icon {
+            width: 2px;
+            height: 30px;
+            background: var(--primary-blue);
+            border-radius: 1px;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            min-height: 100vh;
+            padding: 6rem 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--primary-blue);
+        }
+
+        .about-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(22, 119, 179, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-blue);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            margin: 0 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-blue);
+            border: 4px solid var(--primary-dark);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .timeline-date {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-company {
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        .timeline-description {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 20px 40px rgba(22, 119, 179, 0.2);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--text-light);
             position: relative;
             overflow: hidden;
         }
 
-        .project-image:hover {
-            background: #f1f5f9;
-        }
-
-        .photo-placeholder {
-            text-align: center;
-            color: #64748b;
-            padding: 1rem;
-        }
-
-        .photo-placeholder strong {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #334155;
-        }
-
-        .project-image.has-photo {
-            padding: 0;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-video {
-            position: relative;
-            background: #000;
-        }
-
-        .project-video iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            min-height: 200px;
-        }
-
         .project-content {
-            padding: 1.5rem;
-        }
-
-        .project-meta {
-            font-size: 0.8rem;
-            color: #64748b;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
+            padding: 2rem;
         }
 
         .project-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #1e293b;
             margin-bottom: 1rem;
-            line-height: 1.3;
         }
 
         .project-description {
-            font-size: 0.95rem;
+            color: var(--text-muted);
             line-height: 1.6;
-            color: #475569;
             margin-bottom: 1.5rem;
-        }
-
-        .project-description p {
-            margin-bottom: 0.8rem;
-        }
-
-        .project-description p:last-child {
-            margin-bottom: 0;
         }
 
         .project-tags {
@@ -1351,125 +939,549 @@
             gap: 0.5rem;
         }
 
-        .tag {
-            background: rgba(71, 85, 105, 0.1);
-            color: #334155;
-            padding: 0.4rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.75rem;
+        .project-tag {
+            background: rgba(22, 119, 179, 0.2);
+            color: var(--primary-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
             font-weight: 500;
-            border: 1px solid rgba(71, 85, 105, 0.15);
         }
 
-        /* Non-featured cards */
-        .project-card:not(.featured) .project-image {
-            min-height: 180px;
+        /* Contact Section */
+        .contact {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-light), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-subtitle {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(22, 119, 179, 0.3);
+        }
+
+        /* ===== FLOATING JOURNEY BUTTON ===== */
+        .floating-journey-cta {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
+            color: white;
+            padding: 12px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(22, 119, 179, 0.3);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+            text-decoration: none;
+        }
+
+        .floating-journey-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(22, 119, 179, 0.4);
+        }
+
+        .floating-icon {
+            font-size: 1.5rem;
+            animation: globe-spin 4s linear infinite;
+        }
+
+        @keyframes globe-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .floating-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .floating-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .floating-subtitle {
+            font-size: 0.8rem;
+            opacity: 0.85;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hover Effects */
+        .hover-effect {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hover-effect::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hover-effect:hover::before {
+            left: 100%;
         }
 
         /* Responsive Design */
-        @media (max-width: 968px) {
-            .project-card.featured {
-                grid-column: span 1;
-                display: block;
-            }
-
-            .project-media {
-                display: block;
-            }
-
-            .project-video {
-                min-height: 200px;
-            }
-        }
-
         @media (max-width: 768px) {
+            .header {
+                padding: 1rem 1.5rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr !important;
+                gap: 3rem !important;
+                text-align: center !important;
+                padding-top: 4rem;
+            }
+
+            .hero-text {
+                text-align: center !important;
+                order: 2;
+            }
+
+            .hero-photo-container {
+                order: 1;
+                margin-top: 2rem;
+            }
+
+            .hero-photo {
+                width: 220px;
+                height: 220px;
+                margin: 0 auto;
+            }
+
+            .hero-stats {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 220px;
+                margin: 1rem auto 0;
+                gap: 0.8rem;
+            }
+
+            .stat-card {
+                padding: 1rem 0.8rem;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+
+            .stat-label {
+                font-size: 0.7rem;
+            }
+
+            .nav-link {
+                font-size: 2rem;
+                letter-spacing: 2px;
+            }
+
+            .menu-languages {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-item {
+                flex-direction: row !important;
+                padding-left: 4rem;
+            }
+
+            .timeline-content {
+                margin: 0;
+            }
+
+            .timeline-marker {
+                left: 2rem;
+            }
+
             .projects-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
 
-            .project-card.featured {
-                grid-column: span 1;
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
             }
 
-            .project-image {
-                min-height: 160px;
+            .section {
+                padding: 4rem 1rem;
             }
 
-            .project-content {
-                padding: 1.25rem;
+            .photo-modal-content {
+                margin: 1rem;
+                padding: 1.5rem;
+            }
+
+            .upload-area {
+                padding: 2rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 8vw, 3rem);
+            }
+
+            .hero-description {
+                font-size: 1rem;
+            }
+
+            .hero-cta {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .floating-journey-cta {
+                right: 15px;
+                bottom: 15px;
+                padding: 10px 14px;
+            }
+
+            .floating-title {
+                font-size: 0.8rem;
+            }
+
+            .floating-subtitle {
+                font-size: 0.7rem;
             }
         }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--primary-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-blue);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2196F3;
+        }
     </style>
+</head>
+<body>
+<!-- WebGL Canvas Background -->
+<canvas id="main-canvas"></canvas>
 
-    <script>
-        // Simple photo upload functionality
-        window.uploadProjectPhoto = function(projectType) {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
+<!-- Loading Screen -->
+<div class="loading-container" id="loadingContainer">
+    <div class="loading-logo"></div>
+    <div class="loading-text">Hi, I'm Berend.</div>
+</div>
 
-            input.onchange = function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        // Find the clicked image container
-                        const imageContainers = document.querySelectorAll('.project-image');
-                        const targetContainer = event.target.closest ?
-                            event.target.closest('.project-image') :
-                            Array.from(imageContainers).find(container =>
-                                container.onclick.toString().includes(projectType)
-                            );
+<!-- Header -->
+<header class="header" id="header">
+    <a href="#" class="logo">Berend</a>
+    <nav>
+        <ul class="nav-menu" id="navMenu">
+            <li class="nav-menu-item"><a href="#home" class="nav-link active">Home</a></li>
+            <li class="nav-menu-item"><a href="#about" class="nav-link">About</a></li>
+            <li class="nav-menu-item"><a href="#experience" class="nav-link">Experience</a></li>
+            <li class="nav-menu-item"><a href="#projects" class="nav-link">Projects</a></li>
+            <li class="nav-menu-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" id="menuToggle">
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+            <div class="menu-bar"></div>
+        </div>
+    </nav>
+</header>
 
-                        if (targetContainer) {
-                            // Replace placeholder with image
-                            targetContainer.innerHTML = `<img src="${e.target.result}" alt="${projectType} project photo">`;
-                            targetContainer.classList.add('has-photo');
-                            targetContainer.onclick = () => uploadProjectPhoto(projectType); // Keep upload functionality
-                        }
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
+<!-- Floating Journey Button -->
+<a href="global-journey.html" class="floating-journey-cta" title="Explore My Global Journey" target="_blank">
+    <div class="floating-icon">🌍</div>
+    <div class="floating-text">
+        <span class="floating-title">Journey</span>
+        <span class="floating-subtitle">Explore</span>
+    </div>
+</a>
 
-            input.click();
-        };
-    </script>
-
-    <!-- Writing Samples Section -->
-    <section id="writing" class="section writing">
-        <div class="container">
-            <div class="section-intro">
-                <h2 class="section-title">Strategic Project Work</h2>
-                <p class="section-subtitle">Selected examples of navigating complex stakeholder environments and institutional requirements to achieve collaborative outcomes.</p>
+<!-- Main Container -->
+<div class="main-container">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <div class="hero-subtitle">International Bridge Builder</div>
+                <h1 class="hero-title">Connecting People, Policies & Markets</h1>
+                <p class="hero-description">From Singapore military precision to Japanese market entry, from Korean cultural exchange to Kenyan sustainability projects — I turn complex international challenges into aligned solutions.</p>
+                <a href="#contact" class="hero-cta hover-effect">
+                    Let's Connect
+                    <span>→</span>
+                </a>
             </div>
-            <div class="projects-grid">
-                <div class="project-card featured fade-in">
-                    <div class="project-image" style="background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);">Government Funding Success</div>
+            <div class="hero-photo-container">
+                <div class="hero-photo" onclick="openPhotoModal()">
+                    <div class="photo-placeholder">
+                        <img src="Profile.jpeg" alt="Professional Headshot">
+                    </div>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">7</div>
+                        <div class="stat-label">Languages</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label">Countries</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">3</div>
+                        <div class="stat-label">Continents</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">2.5</div>
+                        <div class="stat-label">Years Intl</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-icon"></div>
+        </div>
+    </section>
+
+    <!-- Photo Upload Modal -->
+    <div class="photo-modal" id="photoModal">
+        <div class="photo-modal-content">
+            <button class="photo-modal-close" onclick="closePhotoModal()">×</button>
+            <h3>Upload Professional Photo</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Choose a high-quality professional headshot</p>
+
+            <div class="upload-area" id="uploadArea">
+                <div class="photo-upload-icon">📁</div>
+                <div class="photo-upload-text">Drag & Drop or Click to Upload</div>
+                <div class="photo-upload-hint">JPG, PNG up to 5MB</div>
+            </div>
+
+            <input type="file" id="photoInput" accept="image/*" style="display: none;">
+
+            <div style="display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;">
+                <button onclick="triggerFileInput()" class="hero-cta" style="padding: 0.8rem 1.5rem; font-size: 0.9rem;">
+                    Choose File
+                </button>
+                <button onclick="closePhotoModal()" style="padding: 0.8rem 1.5rem; background: var(--glass-bg); border: 1px solid var(--border-color); border-radius: 25px; color: var(--text-light); cursor: pointer;">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">I'm the bridge builder who turns complex multi-stakeholder challenges into aligned, actionable solutions</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-content fade-in">
+                    <h3>My Approach</h3>
+                    <p>International collaboration isn't just about translation—it's about aligning logics, incentives, and stories across borders. I understand institutional logic, cultural context, and unspoken dynamics beyond surface requirements.</p>
+                    <p>Military training taught me to balance granular attention to detail with strategic overview—essential for stakeholder alignment in complex international environments.</p>
+                </div>
+                <div class="skills-grid fade-in">
+                    <div class="skill-card">
+                        <div class="skill-icon">🌍</div>
+                        <div class="skill-title">Cross-Cultural</div>
+                        <div class="skill-description">7 languages, 5 countries, deep cultural understanding</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🤝</div>
+                        <div class="skill-title">Stakeholder Alignment</div>
+                        <div class="skill-description">Complex multi-party coordination and consensus building</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">📋</div>
+                        <div class="skill-title">Policy Writing</div>
+                        <div class="skill-description">Strategic documentation and regulatory navigation</div>
+                    </div>
+                    <div class="skill-card">
+                        <div class="skill-icon">🎯</div>
+                        <div class="skill-title">Systems Thinking</div>
+                        <div class="skill-description">Military precision meets strategic overview</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Professional Journey</h2>
+                <p class="section-subtitle">Key experiences that shaped my international perspective</p>
+            </div>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019 - 2021</div>
+                        <h3 class="timeline-title">Transport Operator</h3>
+                        <div class="timeline-company">Singapore Air Force</div>
+                        <p class="timeline-description">Led logistics operations requiring coordination between multiple departments, strict adherence to protocols, and real-time problem-solving under pressure.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2023</div>
+                        <h3 class="timeline-title">Exchange Student</h3>
+                        <div class="timeline-company">Sungkyunkwan University, Seoul</div>
+                        <p class="timeline-description">Specialized in East Asian business practices and gained firsthand insights into Asian institutional frameworks essential for international coordination.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h3 class="timeline-title">Business Development Intern</h3>
+                        <div class="timeline-company">Flanders Investment & Trade, Tokyo</div>
+                        <p class="timeline-description">Facilitated market entry for Flemish companies in Japan, coordinating between European business approaches and Japanese institutional expectations.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Present</div>
+                        <h3 class="timeline-title">Project Leader</h3>
+                        <div class="timeline-company">Supetai Kenya Micro Recycling Center</div>
+                        <p class="timeline-description">Leading international development initiative, aligning international funding criteria with local community needs and environmental standards.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2 class="section-title">Current Projects</h2>
+                <p class="section-subtitle">Active initiatives combining entrepreneurship, sustainability, and international collaboration</p>
+            </div>
+            <div class="projects-grid fade-in">
+                <div class="project-card hover-effect">
+                    <div class="project-image" style="background-image: url('Kenya2.jpeg'); background-size: cover; background-position: center;"></div>
                     <div class="project-content">
-                        <div class="project-meta">Multi-Stakeholder Coordination</div>
-                        <h3 class="project-title">Supetai Kenya: Institutional Alignment Project</h3>
-                        <div class="project-description">
-                            <p style="margin-bottom: 12px;">Led a complex stakeholder coordination challenge: aligning international development priorities, local community needs, environmental standards, and economic sustainability requirements into a coherent implementation strategy.</p>
-                            <p style="font-weight: 500; color: var(--accent-primary); font-size: 0.9rem;">Challenge: Each stakeholder group had different success metrics, communication styles, and decision-making processes requiring carefully adapted approaches to build consensus.</p>
+                        <h3 class="project-title">Supetai Kenya Project</h3>
+                        <p class="project-description">Leading international development initiative creating micro recycling center in rural Kenya, coordinating diverse stakeholder requirements into coherent implementation strategy.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Stakeholder Alignment</span>
+                            <span class="project-tag">Sustainability</span>
                         </div>
                     </div>
                 </div>
-                <div class="project-card fade-in">
-                    <div class="project-image" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">Regulatory Compliance</div>
+                <div class="project-card hover-effect">
+                    <div class="project-image" style="background-image: url('Slush\'D Ghent 2024.jpeg'); background-size: cover; background-position: center;"></div>
                     <div class="project-content">
-                        <div class="project-meta">Government Relations • Market Entry</div>
-                        <h3 class="project-title">Japan Market Entry Regulatory Guides</h3>
-                        <div class="project-description">Strategic briefing documents for Flemish SMEs navigating Japanese government regulations. Combined legal compliance requirements, cultural protocols, and phased implementation strategies tailored to specific industry requirements and regulatory frameworks.</div>
+                        <h3 class="project-title">Slush'D Ghent 2024</h3>
+                        <p class="project-description">Partnership team member for 1000+ attendee startup event, coordinating with founders, investors, and international participants across multiple time zones.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Event Management</span>
+                            <span class="project-tag">Partnerships</span>
+                        </div>
                     </div>
                 </div>
-                <div class="project-card fade-in">
-                    <div class="project-image" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">Stakeholder Coordination</div>
+                <div class="project-card hover-effect">
+                    <div class="project-image" style="background-image: url('LeuvenGakuseiForum.jpeg'); background-size: cover; background-position: center;"></div>
                     <div class="project-content">
-                        <div class="project-meta">Event Management • 1000+ Participants</div>
-                        <h3 class="project-title">Slush'D Multi-Stakeholder Communications</h3>
-                        <div class="project-description">Multi-channel outreach campaigns targeting startup founders, government representatives, and international investors. Balanced institutional tone with compelling value propositions across diverse stakeholder groups and regulatory requirements.</div>
+                        <h3 class="project-title">Leuven Gakusei Forum</h3>
+                        <p class="project-description">Organizing cultural exchange events between Japanese exchange students and local community, building bridges across language and cultural barriers.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Cultural Exchange</span>
+                            <span class="project-tag">Community Building</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1477,569 +1489,421 @@
     </section>
 
     <!-- Contact Section -->
-    <!-- Contact Section - Improved Layout -->
-    <section id="contact" class="section contact">
-        <div class="container">
-            <div class="contact-header">
-                <h2 class="contact-title">Let's Connect</h2>
-                <div class="availability-status">
-                    <div class="status-dot"></div>
-                    <span>Available for opportunities</span>
-                </div>
-            </div>
-
-            <div class="contact-content">
-                <!-- Main Contact Info -->
-                <div class="contact-main">
-                    <div class="contact-cards">
-                        <div class="contact-card primary">
-                            <div class="card-icon">✉️</div>
-                            <div class="card-content">
-                                <div class="card-label">Email</div>
-                                <a href="mailto:berend.buyle@gmail.com" class="card-value">berend.buyle@gmail.com</a>
-                                <div class="card-note">Preferred for project inquiries</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="card-icon">📱</div>
-                            <div class="card-content">
-                                <div class="card-label">Phone</div>
-                                <a href="tel:+32489749324" class="card-value">+32 489 74 93 24</a>
-                                <div class="card-note">Belgium timezone (CET/CEST)</div>
-                            </div>
-                        </div>
-
-                        <div class="contact-card">
-                            <div class="card-icon">📍</div>
-                            <div class="card-content">
-                                <div class="card-label">Location</div>
-                                <div class="card-value">Leuven, Belgium</div>
-                                <div class="card-note">Open to remote & international work</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Key Actions -->
-                    <div class="action-buttons">
-                        <a href="berendbuyle_cv_eng.pdf" class="action-btn primary" download="berendbuyle_cv_eng.pdf" target="_blank">
-                            <span class="btn-icon">📄</span>
-                            <span class="btn-text">Download CV</span>
-                            <span class="btn-arrow">↓</span>
-                        </a>
-                        <a href="https://www.linkedin.com/in/berend-buyle-7611a9225/" class="action-btn secondary" target="_blank">
-                            <span class="btn-icon">💼</span>
-                            <span class="btn-text">LinkedIn Profile</span>
-                            <span class="btn-arrow">→</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Side Panel -->
-                <div class="contact-side">
-                    <!-- Professional Photo -->
-                    <div class="professional-photo" onclick="uploadContactPhoto()">
-                        <div class="photo-placeholder">
-                            <div style="font-size: 1.5rem; margin-bottom: 8px;">📸</div>
-                            <strong>Professional Photo</strong><br>
-                            <small style="color: #999; margin-top: 6px;">Click to add</small>
-                        </div>
-                    </div>
-
-                    <!-- Quick Info -->
-                    <div class="quick-info">
-                        <div class="info-item">
-                            <div class="info-label">Languages</div>
-                            <div class="info-value">Dutch, English, Japanese, French, Mandarin</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">Expertise</div>
-                            <div class="info-tags">
-                                <span class="info-tag">International Business</span>
-                                <span class="info-tag">Cross-Cultural Communication</span>
-                                <span class="info-tag">Stakeholder Management</span>
-                                <span class="info-tag">Policy Writing</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Additional Links -->
-                    <div class="additional-links">
-                        <a href="https://github.com/buyleyl" class="social-link" target="_blank">
-                        <span class="social-icon">
-                            <svg viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-                            </svg>
-                        </span>
-                            <span>GitHub</span>
-                        </a>
-                    </div>
+    <section id="contact" class="section">
+        <div class="section-container">
+            <div class="contact fade-in">
+                <h2 class="contact-title">Let's Build Bridges Together</h2>
+                <p class="contact-subtitle">Ready to turn your complex international challenges into aligned solutions?</p>
+                <div class="contact-links">
+                    <a href="mailto:berend.buyle@gmail.com" class="contact-link hover-effect">
+                        📧 Email Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/berend-buyle-7611a9225/" class="contact-link hover-effect" target="_blank">
+                        💼 LinkedIn
+                    </a>
+                    <a href="tel:+32489749324" class="contact-link hover-effect">
+                        📱 Call Me
+                    </a>
                 </div>
             </div>
         </div>
     </section>
-
-    <style>
-        .contact-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 3rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid rgba(71, 85, 105, 0.1);
-        }
-
-        .contact-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #1e293b;
-            margin: 0;
-        }
-
-        .availability-status {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            color: #059669;
-            font-weight: 500;
-            background: rgba(16, 185, 129, 0.1);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-        }
-
-        .status-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        .contact-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 3rem;
-            align-items: start;
-        }
-
-        /* Main Contact Section */
-        .contact-cards {
-            display: grid;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .contact-card {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-card.primary {
-            background: rgba(71, 85, 105, 0.05);
-            border-color: rgba(71, 85, 105, 0.15);
-        }
-
-        .card-icon {
-            font-size: 1.5rem;
-            width: 50px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        .card-content {
-            flex: 1;
-        }
-
-        .card-label {
-            font-size: 0.8rem;
-            color: #64748b;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.25rem;
-        }
-
-        .card-value {
-            font-size: 1.1rem;
-            color: #1e293b;
-            font-weight: 600;
-            text-decoration: none;
-            margin-bottom: 0.25rem;
-            display: block;
-        }
-
-        .card-value:hover {
-            color: #475569;
-        }
-
-        .card-note {
-            font-size: 0.85rem;
-            color: #64748b;
-            font-style: italic;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .action-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.8rem;
-            padding: 1rem 1.5rem;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .action-btn.primary {
-            background: linear-gradient(135deg, #475569, #64748b);
-            color: white;
-        }
-
-        .action-btn.primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(71, 85, 105, 0.3);
-        }
-
-        .action-btn.secondary {
-            background: rgba(71, 85, 105, 0.1);
-            color: #334155;
-            border-color: rgba(71, 85, 105, 0.2);
-        }
-
-        .action-btn.secondary:hover {
-            background: rgba(71, 85, 105, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .btn-icon {
-            font-size: 1.1rem;
-        }
-
-        .btn-text {
-            font-size: 0.9rem;
-        }
-
-        .btn-arrow {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-
-        /* Side Panel */
-        .contact-side {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        .professional-photo {
-            width: 100%;
-            height: 200px;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            border: 2px dashed rgba(71, 85, 105, 0.2);
-        }
-
-        .professional-photo:hover {
-            transform: translateY(-2px);
-            border-color: rgba(71, 85, 105, 0.4);
-        }
-
-        .photo-placeholder {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        .photo-placeholder strong {
-            color: #334155;
-            margin-bottom: 0.5rem;
-            font-size: 0.9rem;
-        }
-
-        .professional-photo.has-photo {
-            border-style: solid;
-            border-color: rgba(71, 85, 105, 0.15);
-        }
-
-        .professional-photo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .quick-info {
-            background: rgba(71, 85, 105, 0.03);
-            border-radius: 12px;
-            padding: 1.5rem;
-        }
-
-        .info-item {
-            margin-bottom: 1rem;
-        }
-
-        .info-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .info-label {
-            font-size: 0.8rem;
-            color: #64748b;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 0.5rem;
-        }
-
-        .info-value {
-            font-size: 0.9rem;
-            color: #334155;
-            font-weight: 500;
-            line-height: 1.4;
-        }
-
-        .info-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-        }
-
-        .info-tag {
-            background: rgba(71, 85, 105, 0.1);
-            color: #334155;
-            padding: 0.3rem 0.6rem;
-            border-radius: 12px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            border: 1px solid rgba(71, 85, 105, 0.15);
-        }
-
-        .additional-links {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.8rem 1rem;
-            background: rgba(71, 85, 105, 0.05);
-            border: 1px solid rgba(71, 85, 105, 0.1);
-            border-radius: 8px;
-            text-decoration: none;
-            color: #475569;
-            font-size: 0.85rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            flex: 1;
-            justify-content: center;
-        }
-
-        .social-link:hover {
-            background: rgba(71, 85, 105, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .social-icon {
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 968px) {
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .contact-side {
-                order: -1;
-            }
-
-            .professional-photo {
-                max-width: 200px;
-                margin: 0 auto;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .contact-header {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .contact-title {
-                font-size: 2rem;
-            }
-
-            .action-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-card {
-                padding: 1.25rem;
-            }
-
-            .card-icon {
-                width: 40px;
-                font-size: 1.3rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .action-btn {
-                padding: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .quick-info {
-                padding: 1.25rem;
-            }
-
-            .info-tags {
-                gap: 0.3rem;
-            }
-        }
-    </style>
-
-    <script>
-        // Photo upload functionality
-        window.uploadContactPhoto = function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-
-            input.onchange = function(event) {
-                const file = event.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        const photoContainer = document.querySelector('.professional-photo');
-
-                        // Replace placeholder with image
-                        photoContainer.innerHTML = `<img src="${e.target.result}" alt="Professional photo of Berend Buyle">`;
-                        photoContainer.classList.add('has-photo');
-
-                        // Keep upload functionality
-                        photoContainer.onclick = uploadContactPhoto;
-
-                        // Add fade-in effect
-                        const img = photoContainer.querySelector('img');
-                        img.style.opacity = '0';
-                        setTimeout(() => {
-                            img.style.transition = 'opacity 0.5s ease';
-                            img.style.opacity = '1';
-                        }, 100);
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-
-            input.click();
-        };
-    </script>
-</main>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script src="scripts.js"></script>
-
-<!-- 👇 Journey 弹窗模态框结构 👇 -->
-<div id="journeyModal" class="modal hidden">
-    <div class="modal-content">
-        <button onclick="closeJourneyModal()" aria-label="Close globe">✖</button>
-        <canvas id="globeCanvas"></canvas>
-    </div>
 </div>
 
-<!-- 👇 自定义增强脚本：粘贴在此处 👇 -->
 <script>
-    // 平滑滚动导航
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            const targetId = link.dataset.section;
-            const target = document.getElementById(targetId);
-            if (target) {
+    // WebGL Background Animation
+    class WebGLBackground {
+        constructor() {
+            this.canvas = document.getElementById('main-canvas');
+            this.scene = new THREE.Scene();
+            this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, alpha: true });
+            this.particles = [];
+            this.mouse = { x: 0, y: 0 };
+
+            this.init();
+            this.createParticles();
+            this.animate();
+            this.bindEvents();
+        }
+
+        init() {
+            this.renderer.setSize(window.innerWidth, window.innerHeight);
+            this.renderer.setPixelRatio(window.devicePixelRatio);
+            this.camera.position.z = 5;
+        }
+
+        createParticles() {
+            const geometry = new THREE.BufferGeometry();
+            const particleCount = 150;
+            const positions = new Float32Array(particleCount * 3);
+            const colors = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                positions[i] = (Math.random() - 0.5) * 20;
+                positions[i + 1] = (Math.random() - 0.5) * 20;
+                positions[i + 2] = (Math.random() - 0.5) * 20;
+
+                colors[i] = Math.random() * 0.5 + 0.5;
+                colors[i + 1] = Math.random() * 0.5 + 0.8;
+                colors[i + 2] = 1;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            this.particleSystem = new THREE.Points(geometry, material);
+            this.scene.add(this.particleSystem);
+
+            this.createConnections();
+        }
+
+        createConnections() {
+            const geometry = new THREE.BufferGeometry();
+            const positions = this.particleSystem.geometry.attributes.position.array;
+            const linePositions = [];
+
+            for (let i = 0; i < positions.length; i += 9) {
+                if (i + 6 < positions.length) {
+                    linePositions.push(
+                        positions[i], positions[i + 1], positions[i + 2],
+                        positions[i + 3], positions[i + 4], positions[i + 5]
+                    );
+                }
+            }
+
+            geometry.setAttribute('position', new THREE.Float32BufferAttribute(linePositions, 3));
+
+            const material = new THREE.LineBasicMaterial({
+                color: 0x1677B3,
+                transparent: true,
+                opacity: 0.1
+            });
+
+            this.lines = new THREE.LineSegments(geometry, material);
+            this.scene.add(this.lines);
+        }
+
+        animate() {
+            requestAnimationFrame(() => this.animate());
+
+            this.particleSystem.rotation.x += 0.001;
+            this.particleSystem.rotation.y += 0.002;
+
+            if (this.lines) {
+                this.lines.rotation.x += 0.001;
+                this.lines.rotation.y += 0.002;
+            }
+
+            this.camera.position.x += (this.mouse.x * 0.5 - this.camera.position.x) * 0.05;
+            this.camera.position.y += (-this.mouse.y * 0.5 - this.camera.position.y) * 0.05;
+            this.camera.lookAt(this.scene.position);
+
+            this.renderer.render(this.scene, this.camera);
+        }
+
+        bindEvents() {
+            window.addEventListener('resize', () => {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            document.addEventListener('mousemove', (event) => {
+                this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+            });
+        }
+    }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        // Initialize WebGL background
+        const webglBg = new WebGLBackground();
+
+        // Loading animation
+        setTimeout(() => {
+            document.getElementById('loadingContainer').classList.add('hidden');
+        }, 2000);
+
+        // Navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        const sections = document.querySelectorAll('.section, .hero');
+        const header = document.getElementById('header');
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        // Mobile menu toggle
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth scrolling
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
                 e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                const targetId = link.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+
+                    // Close mobile menu
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // Scroll effects
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            // Header scroll effect
+            if (scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Active navigation
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 200;
+                const sectionHeight = section.clientHeight;
+
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            const rate = scrolled * -0.5;
+
+            if (hero) {
+                hero.style.transform = `translateY(${rate}px)`;
             }
         });
-    });
 
+        // Project card interactions
+        const projectCards = document.querySelectorAll('.project-card');
+        projectCards.forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
 
-    // 浮动 Journey 按钮 → 弹出 globe 弹窗
-    document.getElementById('floatingJourney').addEventListener('click', () => {
-        document.getElementById('journeyModal').classList.remove('hidden');
-        initGlobe(); // 渲染 globe
-    });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
 
-    function closeJourneyModal() {
-        document.getElementById('journeyModal').classList.add('hidden');
-    }
+        // Typewriter effect for hero title
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle) {
+            const text = heroTitle.textContent;
+            heroTitle.textContent = '';
+            let i = 0;
 
-    // 初始化 Three.js Globe
-    function initGlobe() {
-        const container = document.getElementById('globeCanvas');
-        container.innerHTML = ''; // 清除旧 canvas
-
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        container.appendChild(renderer.domElement);
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-        camera.position.z = 300;
-
-        const globe = new ThreeGlobe().globeImageUrl('//unpkg.com/three-globe/example/img/earth-dark.jpg');
-        scene.add(globe);
-
-        const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        function animate() {
-            requestAnimationFrame(animate);
-            globe.rotation.y += 0.002;
-            controls.update();
-            renderer.render(scene, camera);
+            setTimeout(() => {
+                const typeWriter = () => {
+                    if (i < text.length) {
+                        heroTitle.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                };
+                typeWriter();
+            }, 2500);
         }
-        animate();
-    }
-</script>
 
+        // Add particle trail on mouse move
+        let particles = [];
+        document.addEventListener('mousemove', (e) => {
+            if (Math.random() > 0.9) {
+                createParticle(e.clientX, e.clientY);
+            }
+        });
+
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.style.position = 'fixed';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.width = '4px';
+            particle.style.height = '4px';
+            particle.style.background = '#1677B3';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            particle.style.zIndex = '999';
+            particle.style.opacity = '0.8';
+            document.body.appendChild(particle);
+
+            let opacity = 0.8;
+            let size = 4;
+            const fadeOut = setInterval(() => {
+                opacity -= 0.05;
+                size -= 0.2;
+                particle.style.opacity = opacity;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+
+                if (opacity <= 0) {
+                    clearInterval(fadeOut);
+                    document.body.removeChild(particle);
+                }
+            }, 50);
+        }
+
+        // Add floating animation to skill cards
+        const skillCards = document.querySelectorAll('.skill-card');
+        skillCards.forEach((card, index) => {
+            card.style.animation = `float 3s ease-in-out infinite`;
+            card.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // CSS for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+                @keyframes float {
+                    0%, 100% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                }
+            `;
+        document.head.appendChild(style);
+
+        // Photo upload functionality
+        window.openPhotoModal = function() {
+            document.getElementById('photoModal').classList.add('active');
+        };
+
+        window.closePhotoModal = function() {
+            document.getElementById('photoModal').classList.remove('active');
+        };
+
+        window.triggerFileInput = function() {
+            document.getElementById('photoInput').click();
+        };
+
+        // File upload handling
+        const photoInput = document.getElementById('photoInput');
+        const uploadArea = document.getElementById('uploadArea');
+
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                handlePhotoUpload(file);
+            }
+        });
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            uploadArea.classList.add('drag-over');
+        });
+
+        uploadArea.addEventListener('dragleave', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+        });
+
+        uploadArea.addEventListener('drop', function(e) {
+            e.preventDefault();
+            uploadArea.classList.remove('drag-over');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                handlePhotoUpload(file);
+            }
+        });
+
+        uploadArea.addEventListener('click', function() {
+            photoInput.click();
+        });
+
+        function handlePhotoUpload(file) {
+            if (file.size > 5 * 1024 * 1024) {
+                alert('File size must be less than 5MB');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const heroPhoto = document.querySelector('.hero-photo');
+                heroPhoto.innerHTML = `<img src="${e.target.result}" alt="Professional Headshot">`;
+                closePhotoModal();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Add some interactive effects
+    document.addEventListener('click', (e) => {
+        // Create ripple effect on click
+        const ripple = document.createElement('div');
+        ripple.style.position = 'fixed';
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        ripple.style.width = '0px';
+        ripple.style.height = '0px';
+        ripple.style.background = 'rgba(22, 119, 179, 0.3)';
+        ripple.style.borderRadius = '50%';
+        ripple.style.pointerEvents = 'none';
+        ripple.style.zIndex = '999';
+        ripple.style.transform = 'translate(-50%, -50%)';
+        document.body.appendChild(ripple);
+
+        let size = 0;
+        let opacity = 0.3;
+        const expand = setInterval(() => {
+            size += 10;
+            opacity -= 0.01;
+            ripple.style.width = size + 'px';
+            ripple.style.height = size + 'px';
+            ripple.style.background = `rgba(22, 119, 179, ${opacity})`;
+
+            if (opacity <= 0) {
+                clearInterval(expand);
+                document.body.removeChild(ripple);
+            }
+        }, 16);
+    });
+</script>
 </body>
 </html>
-
