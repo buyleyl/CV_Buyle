@@ -746,7 +746,8 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
+            align-items: flex-start;
+            margin-bottom: 3rem;
         }
 
         .about-content h3 {
@@ -798,6 +799,190 @@
         .skill-description {
             font-size: 0.9rem;
             color: var(--text-muted);
+        }
+
+        /* Language Skills */
+        .languages-section {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            margin-top: 2rem;
+        }
+
+        .languages-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .language-item:hover {
+            background: rgba(22, 119, 179, 0.1);
+            transform: translateX(5px);
+        }
+
+        .language-info {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .language-flag {
+            font-size: 1.2rem;
+        }
+
+        .language-name {
+            font-weight: 600;
+            color: var(--text-light);
+            min-width: 80px;
+        }
+
+        .language-level {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .language-dots {
+            display: flex;
+            gap: 0.3rem;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .dot.filled {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 8px rgba(22, 119, 179, 0.4);
+        }
+
+        .dot.empty {
+            background: transparent;
+        }
+
+        /* Education Timeline */
+        .education-section {
+            margin-top: 4rem;
+        }
+
+        .education-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--primary-blue);
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .education-timeline {
+            position: relative;
+            padding: 1rem 0;
+        }
+
+        .education-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-blue), rgba(22, 119, 179, 0.3));
+            transform: translateX(-50%);
+        }
+
+        .education-item {
+            display: flex;
+            margin-bottom: 2rem;
+            position: relative;
+            align-items: center;
+        }
+
+        .education-item:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .education-content {
+            flex: 1;
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            backdrop-filter: blur(20px);
+            margin: 0 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .education-content:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 8px 25px rgba(22, 119, 179, 0.2);
+        }
+
+        .education-marker {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-blue);
+            border: 4px solid var(--primary-dark);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            box-shadow: 0 0 12px rgba(22, 119, 179, 0.6);
+        }
+
+        .education-period {
+            color: var(--primary-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .education-institution {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            color: var(--text-light);
+        }
+
+        .education-degree {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .education-flag {
+            font-size: 1rem;
         }
 
         /* Experience Timeline */
@@ -1160,6 +1345,40 @@
                 gap: 2rem;
             }
 
+            .languages-section {
+                margin-top: 2rem;
+            }
+
+            .language-item {
+                padding: 0.6rem;
+            }
+
+            .language-name {
+                min-width: 70px;
+                font-size: 0.9rem;
+            }
+
+            .language-level {
+                font-size: 0.7rem;
+            }
+
+            .education-timeline::before {
+                left: 2rem;
+            }
+
+            .education-item {
+                flex-direction: row !important;
+                padding-left: 4rem;
+            }
+
+            .education-content {
+                margin: 0;
+            }
+
+            .education-marker {
+                left: 2rem;
+            }
+
             .timeline::before {
                 left: 2rem;
             }
@@ -1369,26 +1588,183 @@
                     <p>International collaboration isn't just about translation—it's about aligning logics, incentives, and stories across borders. I understand institutional logic, cultural context, and unspoken dynamics beyond surface requirements.</p>
                     <p>Military training taught me to balance granular attention to detail with strategic overview—essential for stakeholder alignment in complex international environments.</p>
                 </div>
-                <div class="skills-grid fade-in">
-                    <div class="skill-card">
-                        <div class="skill-icon">🌍</div>
-                        <div class="skill-title">Cross-Cultural</div>
-                        <div class="skill-description">7 languages, 5 countries, deep cultural understanding</div>
+                <div class="fade-in">
+                    <!-- Language Skills -->
+                    <div class="languages-section">
+                        <h3 class="languages-title">🌐 Language Portfolio</h3>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇳🇱</span>
+                                <span class="language-name">Dutch</span>
+                                <span class="language-level">(Native)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇺🇸</span>
+                                <span class="language-name">English</span>
+                                <span class="language-level">(Native)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇯🇵</span>
+                                <span class="language-name">Japanese</span>
+                                <span class="language-level">(Advanced)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot empty"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇫🇷</span>
+                                <span class="language-name">French</span>
+                                <span class="language-level">(Conversational)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇨🇳</span>
+                                <span class="language-name">Mandarin</span>
+                                <span class="language-level">(Basic+)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇰🇷</span>
+                                <span class="language-name">Korean</span>
+                                <span class="language-level">(Basic+)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot filled"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                            </div>
+                        </div>
+                        <div class="language-item">
+                            <div class="language-info">
+                                <span class="language-flag">🇩🇪</span>
+                                <span class="language-name">German</span>
+                                <span class="language-level">(Beginner)</span>
+                            </div>
+                            <div class="language-dots">
+                                <div class="dot filled"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                                <div class="dot empty"></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🤝</div>
-                        <div class="skill-title">Stakeholder Alignment</div>
-                        <div class="skill-description">Complex multi-party coordination and consensus building</div>
+                </div>
+            </div>
+
+            <!-- Core Skills Grid -->
+            <div class="skills-grid fade-in">
+                <div class="skill-card">
+                    <div class="skill-icon">🌍</div>
+                    <div class="skill-title">Cross-Cultural</div>
+                    <div class="skill-description">7 languages, 5 countries, deep cultural understanding</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🤝</div>
+                    <div class="skill-title">Stakeholder Alignment</div>
+                    <div class="skill-description">Complex multi-party coordination and consensus building</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">📋</div>
+                    <div class="skill-title">Policy Writing</div>
+                    <div class="skill-description">Strategic documentation and regulatory navigation</div>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎯</div>
+                    <div class="skill-title">Systems Thinking</div>
+                    <div class="skill-description">Military precision meets strategic overview</div>
+                </div>
+            </div>
+
+            <!-- Education Timeline -->
+            <div class="education-section fade-in">
+                <h3 class="education-title">🎓 Academic Journey</h3>
+                <div class="education-timeline">
+                    <div class="education-item">
+                        <div class="education-marker"></div>
+                        <div class="education-content">
+                            <div class="education-period">
+                                <span class="education-flag">🇧🇪</span>
+                                <span>2024 - Present</span>
+                            </div>
+                            <div class="education-institution">KU Leuven, Belgium</div>
+                            <div class="education-degree">MA Business Economics</div>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">📋</div>
-                        <div class="skill-title">Policy Writing</div>
-                        <div class="skill-description">Strategic documentation and regulatory navigation</div>
+                    <div class="education-item">
+                        <div class="education-marker"></div>
+                        <div class="education-content">
+                            <div class="education-period">
+                                <span class="education-flag">🇰🇷</span>
+                                <span>Aug - Dec 2023</span>
+                            </div>
+                            <div class="education-institution">Sungkyunkwan University, Seoul</div>
+                            <div class="education-degree">Exchange Program - East Asian Business Culture</div>
+                        </div>
                     </div>
-                    <div class="skill-card">
-                        <div class="skill-icon">🎯</div>
-                        <div class="skill-title">Systems Thinking</div>
-                        <div class="skill-description">Military precision meets strategic overview</div>
+                    <div class="education-item">
+                        <div class="education-marker"></div>
+                        <div class="education-content">
+                            <div class="education-period">
+                                <span class="education-flag">🇧🇪</span>
+                                <span>2021 - 2024</span>
+                            </div>
+                            <div class="education-institution">KU Leuven, Belgium</div>
+                            <div class="education-degree">BA Applied Economics</div>
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-marker"></div>
+                        <div class="education-content">
+                            <div class="education-period">
+                                <span class="education-flag">🇧🇪</span>
+                                <span>2018 - 2019</span>
+                            </div>
+                            <div class="education-institution">KU Leuven, Belgium</div>
+                            <div class="education-degree">Sinology (Minor: Economics) - The Foundation</div>
+                        </div>
                     </div>
                 </div>
             </div>
