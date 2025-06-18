@@ -425,14 +425,18 @@
             line-height: 1.6;
         }
 
+        .hero-cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
         .hero-cta {
             display: inline-flex;
             align-items: center;
             gap: 1rem;
             padding: 1rem 2rem;
-            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
-            color: var(--text-light);
-            text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             text-transform: uppercase;
@@ -440,6 +444,18 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            text-decoration: none;
+        }
+
+        .hero-cta.primary {
+            background: linear-gradient(135deg, var(--primary-blue), #2196F3);
+            color: var(--text-light);
+        }
+
+        .hero-cta.secondary {
+            background: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
         }
 
         .hero-cta::before {
@@ -457,7 +473,14 @@
             left: 100%;
         }
 
-        .hero-cta:hover {
+        .hero-cta.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(22, 119, 179, 0.4);
+        }
+
+        .hero-cta.secondary:hover {
+            background: var(--primary-blue);
+            color: var(--text-light);
             transform: translateY(-3px);
             box-shadow: 0 10px 30px rgba(22, 119, 179, 0.4);
         }
@@ -1426,9 +1449,18 @@
                 font-size: 1rem;
             }
 
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
             .hero-cta {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
             }
 
             .floating-journey-cta {
@@ -1472,7 +1504,7 @@
 <!-- Loading Screen -->
 <div class="loading-container" id="loadingContainer">
     <div class="loading-logo"></div>
-    <div class="loading-text">Loading Who's Berend</div>
+    <div class="loading-text">Hi, I'm Berend.</div>
 </div>
 
 <!-- Header -->
@@ -1512,10 +1544,15 @@
                 <div class="hero-subtitle">International Bridge Builder</div>
                 <h1 class="hero-title">Connecting People, Policies & Markets</h1>
                 <p class="hero-description">From Singapore military precision to Japanese market entry, from Korean cultural exchange to Kenyan sustainability projects — I turn complex international challenges into aligned solutions.</p>
-                <a href="#contact" class="hero-cta hover-effect">
-                    Let's Connect
-                    <span>→</span>
-                </a>
+                <div class="hero-cta-group">
+                    <a href="global-journey.html" class="hero-cta primary hover-effect" target="_blank">
+                        My Global Journey
+                    </a>
+                    <a href="#contact" class="hero-cta secondary hover-effect">
+                        Let's Connect
+                        <span>→</span>
+                    </a>
+                </div>
             </div>
             <div class="hero-photo-container">
                 <div class="hero-photo" onclick="openPhotoModal()">
@@ -1591,7 +1628,7 @@
                 <div class="fade-in">
                     <!-- Language Skills -->
                     <div class="languages-section">
-                        <h3 class="languages-title">🌐 Language Portfolio</h3>
+                        <h3 class="languages-title">Language Portfolio</h3>
                         <div class="language-item">
                             <div class="language-info">
                                 <span class="language-flag">🇳🇱</span>
@@ -1652,7 +1689,7 @@
                             <div class="language-info">
                                 <span class="language-flag">🇨🇳</span>
                                 <span class="language-name">Mandarin</span>
-                                <span class="language-level">(Basic+)</span>
+                                <span class="language-level">(Conversational)</span>
                             </div>
                             <div class="language-dots">
                                 <div class="dot filled"></div>
@@ -1720,7 +1757,7 @@
 
             <!-- Education Timeline -->
             <div class="education-section fade-in">
-                <h3 class="education-title">🎓 Academic Journey</h3>
+                <h3 class="education-title">Academic Journey</h3>
                 <div class="education-timeline">
                     <div class="education-item">
                         <div class="education-marker"></div>
