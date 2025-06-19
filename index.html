@@ -1234,6 +1234,45 @@
             overflow: hidden;
         }
 
+        /* Video Project Styles */
+        .project-with-video {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-video-container {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .project-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .project-with-video:hover .project-video-container iframe {
+            transform: scale(1.02);
+        }
+
+        .project-with-video:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 20px 40px rgba(22, 119, 179, 0.3);
+        }
+
         .project-content {
             padding: 2rem;
         }
@@ -1760,7 +1799,7 @@
                 <div class="fade-in">
                     <!-- Language Skills -->
                     <div class="languages-section">
-                        <h3 class="languages-title">🌐 Language Portfolio</h3>
+                        <h3 class="languages-title">Language Portfolio</h3>
                         <div class="language-item">
                             <div class="language-info">
                                 <span class="language-flag">🇳🇱</span>
@@ -1889,7 +1928,7 @@
 
             <!-- Education Timeline -->
             <div class="education-section fade-in">
-                <h3 class="education-title">🎓 Academic Journey</h3>
+                <h3 class="education-title">Academic Journey</h3>
                 <div class="education-timeline">
                     <div class="education-item">
                         <div class="education-marker"></div>
@@ -1996,14 +2035,22 @@
                 <p class="section-subtitle">Active initiatives combining entrepreneurship, sustainability, and international collaboration</p>
             </div>
             <div class="projects-grid fade-in">
-                <div class="project-card hover-effect">
-                    <div class="project-image" style="background-image: url('Kenya2.jpeg'); background-size: cover; background-position: center;"></div>
+                <div class="project-card hover-effect project-with-video">
+                    <div class="project-video-container">
+                        <iframe
+                                src="https://player.vimeo.com/video/1086067426?title=0&byline=0&portrait=0&autoplay=0"
+                                allow="autoplay; fullscreen; picture-in-picture"
+                                allowfullscreen
+                                title="Supetai Kenya Project Video">
+                        </iframe>
+                    </div>
                     <div class="project-content">
                         <h3 class="project-title">Supetai Kenya Project</h3>
                         <p class="project-description">Leading international development initiative creating micro recycling center in rural Kenya, coordinating diverse stakeholder requirements into coherent implementation strategy.</p>
                         <div class="project-tags">
                             <span class="project-tag">Stakeholder Alignment</span>
                             <span class="project-tag">Sustainability</span>
+                            <span class="project-tag">🎬 Featured Video</span>
                         </div>
                     </div>
                 </div>
