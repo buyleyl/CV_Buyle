@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Berend's Global Journey</title>
-    <meta name="description" content="Interactive 3D visualization of Berend Buyle's global journey">
+    <title>Berend's Global Journey – Learning, Working & Life on a Rotating Globe</title>
+    <meta name="description" content="Interactive 3D visualization of Berend Buyle's global professional journey across Belgium, Singapore, Korea, Japan, and Kenya.">
     <meta property="og:title" content="Berend's Global Journey - Interactive 3D Experience">
     <meta property="og:description" content="Explore my multicultural professional evolution through an interactive 3D globe.">
     <meta property="og:type" content="website">
@@ -431,19 +431,21 @@
 
 <!-- 错误消息 -->
 <div id="error-message" class="error-message">
-    <h3>⚠️ Loading Error</h3>
+    <h3>⚠ Loading Error</h3>
     <p>Failed to load 3D globe. Please check your internet connection and try again.</p>
     <button onclick="location.reload()" style="margin-top: 10px; padding: 8px 16px; background: var(--accent-blue); color: white; border: none; border-radius: 5px; cursor: pointer;">Retry</button>
 </div>
 
 <div class="header">
-    <h1>My Global Journey</h1>
-    <p><strong>A map of my international experiences</strong></p>
+    <h1>Global Journey</h1>
+    <p><strong>Mapping my multicultural professional evolution</strong></p>
+    <p>A visualization of the countries, experiences, and cultural insights that shaped my international perspective.</p>
 </div>
 
 <div class="info-panel" id="infoPanel">
     <div class="flag" id="flag">🌍</div>
-    <h3 id="location">Click a dot to explore</h3>
+    <h3 id="location">Click a marker</h3>
+    <div class="year" id="year">to explore the journey</div>
     <p id="description"></p>
     <div id="skills"></div>
 </div>
@@ -569,6 +571,8 @@
         setTimeout(() => {
             document.getElementById('loading-indicator').style.display = 'none';
             isLoading = false;
+            // 默认显示第一个位置
+            updateInfoPanel('belgium');
         }, 500);
     };
 
@@ -735,17 +739,26 @@
     function updateInfoPanel(key) {
         const data = journeyData[key];
 
+        console.log('Updating info panel for:', key, data); // Debug log
+
         // 添加面板更新动画
         const panel = document.getElementById("infoPanel");
         panel.style.opacity = "0.7";
         panel.style.transform = panel.style.transform.replace(/scale\([^)]*\)/, '') + ' scale(0.95)';
 
         setTimeout(() => {
-            document.getElementById("flag").textContent = data.flag;
-            document.getElementById("location").textContent = data.name;
-            document.getElementById("year").textContent = data.year;
-            document.getElementById("description").textContent = data.description;
-            document.getElementById("skills").innerHTML = data.skills.map(s => `<span class="skill-tag">${s}</span>`).join('');
+            // 确保所有元素都存在并更新内容
+            const flagEl = document.getElementById("flag");
+            const locationEl = document.getElementById("location");
+            const yearEl = document.getElementById("year");
+            const descriptionEl = document.getElementById("description");
+            const skillsEl = document.getElementById("skills");
+
+            if (flagEl) flagEl.textContent = data.flag;
+            if (locationEl) locationEl.textContent = data.name;
+            if (yearEl) yearEl.textContent = data.year;
+            if (descriptionEl) descriptionEl.textContent = data.description;
+            if (skillsEl) skillsEl.innerHTML = data.skills.map(s => <span class="skill-tag">${s}</span>).join('');
 
             // 添加语言网络扩展信息
             const languageInfo = data.languageConnections;
@@ -773,7 +786,7 @@
                 </p>
                 <div style="margin-bottom: 12px;">
                     ${languageInfo.countries.map(country =>
-                `<span style="display: inline-block; margin: 2px 4px 0 0; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.75rem; color: var(--soft-white);">${country}</span>`
+                <span style="display: inline-block; margin: 2px 4px 0 0; padding: 3px 8px; background: rgba(255,255,255,0.1); border-radius: 8px; font-size: 0.75rem; color: var(--soft-white);">${country}</span>
             ).join('')}
                 </div>
                 <div style="font-size: 0.85rem; color: var(--accent-blue-light); font-weight: 500; font-style: italic;">
@@ -790,7 +803,7 @@
 
         // 更新活跃状态
         document.querySelectorAll('.journey-step').forEach(el => el.classList.remove('active'));
-        const activeStep = document.querySelector(`.journey-step[data-key="${key}"]`);
+        const activeStep = document.querySelector(.journey-step[data-key="${key}"]);
         if (activeStep) {
             activeStep.classList.add('active');
 
